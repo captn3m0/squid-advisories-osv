@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2020:7",
+  "aliases": [
+    "GHSA-qf3v-rc95-96j5",
+    "CVE-2020-15049"
+  ],
+  "summary": "Cache Poisoning Issue in HTTP Request processing",
+  "details": "### Problem Description:\n\n Due to incorrect input validation Squid is vulnerable to a Request Smuggling and\n Poisoning attack against the HTTP cache.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a trusted client to perform request smuggling and poison the\n HTTP cache contents with crafted HTTP(S) request messages.\n\n This attack requires an upstream server to participate in the smuggling and\n generate the poison response sequence. Most popular server software are not\n vulnerable to participation in this attack.\n\nCVSS Score of 9.3\n<https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector=AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:H/E:F/RL:O/RC:C/CR:H/IR:H/AR:H/MAV:N/MAC:L/MPR:L/MUI:N/MS:C/MC:H/MI:H/MA:H&version=3.1>\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid versions 4.12 and 5.0.3.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 4:\n <http://www.squid-cache.org/Versions/v4/SQUID-2020_7.patch>\n\n#### Squid 5:\n <http://www.squid-cache.org/Versions/v5/SQUID-2020_7.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n All Squid-2.x up to and including 2.7.STABLE9 are vulnerable.\n\n All Squid-3.x up to and including 3.5.28 are vulnerable.\n\n All Squid-4.x up to and including 4.11 are vulnerable.\n\n Squid-5.0.1 and 5.0.2 are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\n There is no workaround for this vulnerability.\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by Alex Rousskov of The Measurement Factory.\n\n Independent discovery and replication reported by Amit Klein of Safebreach.\n\n Fixed by Alex Rousskov of The Measurement Factory.\n\n__________________________________________________________________\n\n### Revision history:\n\n 2016-09-06 02:45:20 UTC Initial Report\n 2020-05-11 12:41:17 UTC Replication Reported\n 2020-05-13 14:05:00 UTC Patch Released\n 2020-06-25 11:15:10 UTC CVE Allocated",
+  "published": "2020-06-26T15:44:47Z",
+  "modified": "2023-10-23T08:51:01Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "2.0"
+            },
+            {
+              "last_affected": "2.STABLE9"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.0"
+            },
+            {
+              "last_affected": "3.5.28"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "4.0"
+            },
+            {
+              "fixed": "4.12"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "5.0.1"
+            },
+            {
+              "fixed": "5.0.3"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-qf3v-rc95-96j5"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15049"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-qf3v-rc95-96j5"
+    }
+  ]
+}

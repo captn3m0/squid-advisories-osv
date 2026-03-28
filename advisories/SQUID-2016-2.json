@@ -1,0 +1,69 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2016:2",
+  "aliases": [
+    "CVE-2016-2569",
+    "CVE-2016-2570",
+    "CVE-2016-2571",
+    "CVE-2016-2572"
+  ],
+  "summary": "Multiple Denial of Service in HTTP Response processing",
+  "details": "Problem Description:\n\n Due to incorrect bounds checking Squid is vulnerable to a denial\n of service attack when processing HTTP responses.\n\n Due to incorrect error handling Squid-4 is vulnerable to a denial\n of service attack when processing malformed HTTP responses.\n\n\nSeverity:\n\n These problems allow remote servers delivering certain unusual\n HTTP response syntax to trigger a denial of service for all\n clients accessing the Squid service.\n\n HTTP responses containing malformed headers that trigger this\n issue are becoming common. We are not certain at this time if\n that is a sign of malware or just broken server scripting.\n\n Details of a trivial attack are already circulating publicly.\n\n\nUpdated Packages:\n\n These bugs are fixed by Squid version 3.5.15 and 4.0.7.\n\n In addition, patches addressing these problems for the stable\n release can be found in our patch archives:\n\nSquid 3.5:\n http://www.squid-cache.org/Versions/v3/3.5/changesets/squid-3.5-13990.patch\n http://www.squid-cache.org/Versions/v3/3.5/changesets/squid-3.5-13991.patch\n http://www.squid-cache.org/Versions/v3/3.5/changesets/squid-3.5-13993.patch\n\n Also be aware of additional side effects patched by:\n http://www.squid-cache.org/Versions/v3/3.5/changesets/squid-3.5-13998.patch\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n All Squid-3.2 and older have not been tested but are expected to\n be vulnerable.\n\n All unpatched Squid-3.3 versions are vulnerable.\n\n All unpatched Squid-3.4 versions are vulnerable.\n\n All unpatched Squid-3.5.14 and older are vulnerable.\n\n All unpatched Squid-4.0.6 and older are vulnerable.\n\n\nWorkaround:\n\n There are no good workarounds known for these vulnerabilities.\n\n The following squid.conf settings can protect Squid-3.5 (only)\n against the publicly published attack. But unpatched Squid\n remain vulnerable to other known attacks:\n\n   acl Vary rep_header Vary .\n   store_miss deny Vary\n\nOr,\n\n The following squid.conf settings can protect against the\n publicly published attack. But unpatched Squid remain vulnerable\n to other known attacks:\n\n   cache deny all\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If your install and build Squid from the original Squid sources\n then the squid-users@lists.squid-cache.org mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@lists.squid-cache.org mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n\nCredits:\n\n CVE-2016-2569 bounds checking vulnerability was identified and\n reported by Mathias Fischer from Open Systems AG.\n Fixed by Alex Rousskov from The Measurement Factory.\n\n CVE-2016-2571, CVE-2016-2572 error handling vulnerability was\n found and fixed by Alex Rousskov from The Measurement Factory.\n\n CVE-2016-2570 bounds checking vulnerability was found and fixed\n by William Lima.\n\n\nRevision history:\n\n 2016-02-17 06:51:25 UTC Initial Report\n 2016-02-18 04:15:33 UTC Patches Released\n 2016-02-19 23:15:41 UTC Additional Patches Released\n 2016-02-23 16:37:27 UTC Attack PoC becomes public knowledge\n 2016-02-23 18:23:00 UTC Packages Released\n 2016-02-26 06:45:42 UTC CVE Assignment\n                         Additional patches referenced\n 2016-03-02 02:37:16 UTC Updated workarounds, additional patches\n                         referenced, and corrected affected\n                         version information (intro mistakes)",
+  "published": "2016-02-23T00:00:00Z",
+  "modified": "2016-02-23T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.0"
+            },
+            {
+              "fixed": "3.5.15"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "4.0"
+            },
+            {
+              "fixed": "4.0.7"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2016_2.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-2569"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-2570"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-2571"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-2572"
+    }
+  ]
+}

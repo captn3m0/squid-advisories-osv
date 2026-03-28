@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2021:8",
+  "aliases": [
+    "GHSA-cg5h-v6vc-w33f",
+    "CVE-2023-46728"
+  ],
+  "summary": "Denial of Service in Gopher gateway",
+  "details": "### Problem Description:\n\n Due to a NULL pointer dereference bug Squid is vulnerable to\n a Denial of Service attack against Squid's Gopher gateway.\n\n__________________________________________________________________\n\n### Severity:\n\nThe gopher protocol is always available and enabled in Squid\nprior to Squid 6.0.1\n\nResponses triggering this bug are possible to be received from\nany gopher server, even those without malicious intent.\n\nCVSS Score of 7.5\n<https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector=AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H&version=3.1>\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### The gopher support has been removed in Squid version 6.0.1\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n All Squid-2.x up to and including 2.7.STABLE9 are vulnerable.\n\n All Squid-3.x up to and including 3.5.28 are vulnerable.\n\n All Squid-4.x up to and including 4.16 are vulnerable.\n\n All Squid-5.x up to and including 5.9 are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\n * Reject all gopher URL requests\n\n  acl gopher proto gopher\n  http_access deny gopher\n\n**Important:** This sequence must be placed above any lines\nstarting with \"http_access allow\" in your configuration.\n\n Note: removing the gopher port 70 from the Safe_ports ACL\n       is not sufficient to avoid this vulnerability.\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <https://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by Joshua Rogers of Opera Software.\n\n__________________________________________________________________\n\n### Revision history:\n\n 2021-02-20 08:37:38 UTC Initial Report\n__________________________________________________________________\nEND",
+  "published": "2023-09-27T02:30:56Z",
+  "modified": "2023-11-06T16:43:44Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "0"
+            },
+            {
+              "fixed": "6.0.1"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-cg5h-v6vc-w33f"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46728"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-cg5h-v6vc-w33f"
+    }
+  ]
+}

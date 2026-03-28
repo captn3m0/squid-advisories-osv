@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2020:6",
+  "aliases": [
+    "GHSA-qvf6-485q-vm57",
+    "CVE-2020-14058"
+  ],
+  "summary": "Denial of Service issue in TLS handshake",
+  "details": "Due to use of a potentially dangerous function Squid and the\n default certificate validation helper are vulnerable to a Denial\n of Service attack when processing TLS certificates.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a trusted client to perform Denial of Service\n when opening TLS connections with a server for HTTPS.\n\n This problem allows a trusted client to perform Denial of Service\n when opening TLS connections to a server for SSL-Bump intercepted\n transactions.\n\n This attack is limited to Squid built with OpenSSL features and\n opening peer or server connections for HTTPS traffic and SSL-Bump\n server handshakes.\n\n CVSS Score of 8.3\n <https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector=AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H/E:F/RL:O/RC:C/CR:X/IR:X/AR:H/MAV:N/MAC:H/MPR:N/MUI:X/MS:C/MC:N/MI:N/MA:H&version=3.1>\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid versions 4.12 and 5.0.3.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 4:\n <http://www.squid-cache.org/Versions/v4/SQUID-2020_6.patch>\n\n#### Squid 5:\n <http://www.squid-cache.org/Versions/v5/SQUID-2020_6.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n All Squid-2.x up to and including 2.7.STABLE9 are not vulnerable.\n\n All Squid-3.x up to and including 3.4.14 built without\n --enable-openssl are not vulnerable.\n\n All Squid-3.x up to and including 3.4.14 built with\n --disable-openssl are not vulnerable.\n\n All Squid-3.x up to and including 3.4.14 built with\n --enable-openssl are vulnerable.\n\n All Squid-3.5 up to and including 3.5.28 built without\n --with-openssl are not vulnerable.\n\n All Squid-3.5 up to and including 3.5.28 built with\n --without-openssl are not vulnerable.\n\n All Squid-3.5 up to and including 3.5.28 built with\n --with-openssl are vulnerable.\n\n All Squid-4.x up to and including 4.11 built without\n --with-openssl are not vulnerable.\n\n All Squid-4.x up to and including 4.11 built with\n --without-openssl are not vulnerable.\n\n All Squid-4.x up to and including 4.11 built with --with-openssl\n are vulnerable.\n\n Squid-5.0.1 and 5.0.2 built without --with-openssl are not\n vulnerable.\n\n Squid-5.0.1 and 5.0.2 built with --without-openssl are not\n vulnerable.\n\n Squid-5.0.1 and 5.0.2 built with --with-openssl are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\n * For interception proxies using SSL-Bump functionality there is\n   no workaround.\n\n * For reverse-proxy the GnuTLS support available in Squid-4 may\n   provide sufficient functionality. The vulnerable certificate\n   validator helper feature is not supported yet by GnuTLS builds.\n\n * Other installations just needing to relay HTTPS do not need\n   OpenSSL support and should be able to run a build that does not\n   have --with-openssl.\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by Christof Gerber and Mario Galli of Open Systems AG.\n\n Fixed by Christos Tsantilas of The Measurement Factory.\n\n__________________________________________________________________\n\n### Revision history:\n\n 2020-03-04 09:31:23 UTC Initial Report\n 2020-05-15 04:54:54 UTC Patches Released\n__________________________________________________________________\nEND",
+  "published": "2020-06-19T12:14:30Z",
+  "modified": "2023-10-23T08:58:42Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.1"
+            },
+            {
+              "last_affected": "3.5.28"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "4.0"
+            },
+            {
+              "fixed": "4.12"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "5.0.1"
+            },
+            {
+              "fixed": "5.0.3"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-qvf6-485q-vm57"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14058"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-qvf6-485q-vm57"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2011:1",
+  "aliases": [
+    "CVE-2009-0801"
+  ],
+  "summary": "Bypass of browser same-origin access control",
+  "details": "Problem Description:\n\n Due to Squid not reusing the original destination address on\n intercepted requests it's possible (even trivial) for flash or\n java applets to bypass the same-origin policy in the browser\n when Squid intercepts HTTP requests.\n\n The cause to this is that such applets are allowed to perform\n their own HTTP stack, in which case the same-origin policy of\n the browser sandbox only verifies that the applet tries to\n contact the same IP as from where it was loaded at the IP level.\n Squid then uses the Host header to determine which server to\n forward the request to which may be different from the\n connected IP.\n\n Applies to all Squid releases up to and including 3.2.0.10.\n\n\nSeverity:\n\n This problem allows any browser script to bypass local security\n and retrieve arbitrary content from any source.\n\n\nUpdated Packages:\n\n This bug is fixed by Squid versions 3.2.0.11\n\n Due to the design of request handling processes in older Squid\n patches and fixed releases for older versions of Squid are not\n being provided at this time.\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n Squid and its cache are not harmed by this vulnerability. The\n issue is limited to client browsers.\n\n All Squid releases of any series up to 3.2.0.10 using the\n http_port 'transparent', 'intercept' or 'tproxy' flags are\n active vectors for this browser vulnerability.\n\n\nWorkarounds:\n\n Turn off NAT and TPROXY interception. Including the http_port\n 'transparent', 'intercept' or 'tproxy' flags in squid.conf.\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If your install and build Squid from the original Squid sources\n then the squid-users@squid-cache.org mailing list is your primary\n support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@squid-cache.org mailing list. It's a closed list\n (though anyone can post) and security related bug reports are\n treated in confidence until the impact has been established.\n\n\nCredits:\n\n Thanks to Netspace Ltd and Treehouse Networks Ltd for sponsoring\n the architectural changes in Squid-3.2 leading to this solution.\n\n Thanks to Henrik Nordstrom and Steven Wilton for initial diagnosis.\n\n\nRevision history:\n\n 2011-08-27 10:06 GMT Initial version",
+  "published": "2011-08-27T00:00:00Z",
+  "modified": "2011-08-27T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "1.0"
+            },
+            {
+              "last_affected": "3.1"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.2"
+            },
+            {
+              "fixed": "3.2.0.11"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2011_1.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0801"
+    }
+  ]
+}

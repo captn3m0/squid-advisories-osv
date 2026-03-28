@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2020:8",
+  "aliases": [
+    "GHSA-c7p8-xqhm-49wv",
+    "CVE-2020-15811"
+  ],
+  "summary": "HTTP(S) Request Splitting",
+  "details": "### Problem Description:\n\n Due to incorrect data validation Squid is vulnerable to HTTP Request Splitting\n attacks against HTTP and HTTPS traffic. This leads to cache poisoning.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem is serious because it allows any client, including\n browser scripts, to bypass local security and poison the browser\n cache and any downstream caches with content from an arbitrary\n source.\n\nCVSS Score of 9.3\n<https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector=AV:N/AC:L/PR:L/UI:N/S:C/C:H/I:H/A:N/E:F/RL:O/RC:C/CR:H/IR:H/AR:X/MAV:N/MAC:L/MPR:L/MUI:N/MS:C/MC:H/MI:H/MA:N&version=3.1>\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid versions 4.13 and 5.0.4.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 4:\n <http://www.squid-cache.org/Versions/v4/SQUID-2020_8.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n All Squid configured with \"relaxed_header_parser off\" are not vulnerable.\n\n All Squid-3.x up to and including 3.5.28 with relaxed_header_parser configured to\n  \"on\" or \"warn\" are vulnerable.\n\n All Squid-3.x up to and including 3.5.28 without relaxed_header_parser configured\n are vulnerable.\n\n All Squid-4.x up to and including 4.12 with relaxed_header_parser configured to\n  \"on\" or \"warn\" are vulnerable.\n\n All Squid-4.x up to and including 4.12 without relaxed_header_parser configured\n are vulnerable.\n\n All Squid-5.x up to and including 5.0.3 with relaxed_header_parser configured to\n  \"on\" or \"warn\" are vulnerable.\n\n All Squid-5.x up to and including 5.0.3 without relaxed_header_parser configured\n are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\n Disable the relaxed HTTP parser in squid.conf:\n\n    relaxed_header_parser off\n\n Note, traffic which does not correctly obey HTTP specifications\n will be rejected instead of converted to standards compliance.\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by R\u00e9gis Leroy (regilero\n from Makina Corpus).\n\n Fixed by Amos Jeffries of Treehouse Networks Ltd.\n\n__________________________________________________________________\n\n### Revision history:\n\n 2019-07-24 11:52:51 UTC Initial Report\n 2020-01-09 22:07:44 UTC Additional vectors discovered",
+  "published": "2020-08-23T08:23:05Z",
+  "modified": "2023-10-23T08:54:25Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "2.7"
+            },
+            {
+              "last_affected": "3.5.28"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "4.0"
+            },
+            {
+              "fixed": "4.13"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "5.0.1"
+            },
+            {
+              "fixed": "5.0.4"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-c7p8-xqhm-49wv"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15811"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-c7p8-xqhm-49wv"
+    }
+  ]
+}

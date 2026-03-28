@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2002:2",
+  "aliases": [],
+  "summary": "Internal DNS code issues",
+  "details": "Problem Description:\n A security issue has recently been found and fixed in the Squid-2.X\n releases up to and including 2.4.STABLE4.\n\n Error and boundary conditions were not checked when handling\n compressed DNS answer messages in the internal DNS code (lib/rfc1035.c).\n A malicous DNS server could craft a DNS reply that causes Squid\n to exit with a SIGSEGV.\n\n The relevant code exists in Squid-2.3, Squid-2.4, Squid-2.5 and\n Squid-2.6/Squid-HEAD, and is enabled by default.\n\n\nUpdated Packages:\n\n The Squid-2.4.STABLE6 release contains fixes for all these\n problems. You can download the Squid-2.4.STABLE6 release from\n\n   ftp://ftp.squid-cache.org/pub/archive/2.4/\n   http://www.squid-cache.org/Versions/v2/2.4/\n\n or the mirrors (may take a while before all mirrors are updated).\n For a list of mirror sites see\n\n   http://www.squid-cache.org/Download/ftp-mirrors.html\n   http://www.squid-cache.org/Download/http-mirrors.html\n\n Individual patches to the mentioned issues can be found from our\n patch archive for version Squid-2.4.STABLE4\n\n   http://www.squid-cache.org/Versions/v2/2.4/bugs/\n\n The patches should also apply with only a minimal effort to\n earlier Squid 2.4 versions if required.\n\n The Squid-2.5 and Squid-2.6/Squid-HEAD nightly snapshots contains\n the fixed DNS code.\n\n\nDetermining if your are vulnerable:\n\n You are vulnerable if you are running these versions of Squid\n with internal DNS queries:\n\n * Squid-2.4 version up to and including Squid-2.4.STABLE4\n * Squid-2.5 up to the fix date (Tuesday, March 12 2002 UTC)\n * Squid-2.6 / Squid-HEAD up to the fix date\n   (Tuesday, March 12 2002 UTC)\n * Squid-2.3\n\n Squid uses the internal DNS implementation by default, and\n prints a line like this in cache.log when it is in use:\n\n   DNS Socket created at 0.0.0.0, port 4345, FD 5\n\n\nWorkarounds:\n\n Squid-2.4, Squid-2.5 and Squid-2.6/Squid-HEAD can be recompiled\n to use the external DNS server support by running configure with\n the --disable-internal-dns option. There is no run-time configuration\n option to select between the internal/external DNS code.\n\n We recommend that you upgrade, rather than simply switch to external\n DNS lookups.  The external DNS implementation uses child processes\n and may negatively affect Squid's performance, especially for busy\n caches.\n\nRevision History:\n 2010-09-16 07:05 GMT Reference link updates",
+  "published": "2002-03-26T00:00:00Z",
+  "modified": "2002-03-26T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "2.0"
+            },
+            {
+              "last_affected": "2.4.STABLE4"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2002_2.txt"
+    }
+  ]
+}

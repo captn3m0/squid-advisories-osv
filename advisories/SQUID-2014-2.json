@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2014:2",
+  "aliases": [
+    "CVE-2014-3609"
+  ],
+  "summary": "Denial of Service in request processing",
+  "details": "Problem Description:\n\n Due to incorrect input validation in request parsing Squid is\n vulnerable to a denial of service attack when processing\n Range requests.\n\n\nSeverity:\n\n This problem allows any trusted client to perform a denial of\n service attack on the Squid service.\n\n\nUpdated Packages:\n\n This bug is fixed by Squid version 3.3.13 and 3.4.7\n\n In addition, patches addressing this problem for stable releases\n can be found in our patch archives:\n\nSquid 3.0:\nhttp://www.squid-cache.org/Versions/v3/3.0/changesets/squid-3.0-9201.patch\n\nSquid 3.1:\nhttp://www.squid-cache.org/Versions/v3/3.1/changesets/squid-3.1-10488.patch\n\nSquid 3.2:\nhttp://www.squid-cache.org/Versions/v3/3.2/changesets/squid-3.2-11828.patch\n\nSquid 3.3:\nhttp://www.squid-cache.org/Versions/v3/3.3/changesets/squid-3.3-12680.patch\n\nSquid 3.4:\nhttp://www.squid-cache.org/Versions/v3/3.4/changesets/squid-3.4-13168.patch\n\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\nSquid-3.x:\n\n All Squid-3.x versions up to and including 3.3.12 are vulnerable\n to the problem.\n\nSquid-3.4:\n\n All Squid-3.4 versions up to and including 3.4.6 are vulnerable\n to the problem.\n\n\nWorkaround:\n\n Add the following access control lines to squid.conf above any\n http_access allow lines:\n\n acl validRange req_header Range \\\n  ^bytes=([0-9]+\\-[0-9]*|\\-[0-9]+)(,([0-9]+\\-[0-9]*|\\-[0-9]+))*$\n\n acl validRange req_header Request-Range \\\n  ^bytes=([0-9]+\\-[0-9]*|\\-[0-9]+)(,([0-9]+\\-[0-9]*|\\-[0-9]+))*$\n\n http_access deny !validRange\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the squid-users@squid-cache.org mailing list is your primary\n support point. For subscription details see\n http://www.squid-cache.org/Support/mailing-lists.html.\n\n For reporting of non-security bugs in the latest release\n the squid bugzilla database should be used\n http://bugs.squid-cache.org/.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@squid-cache.org mailing list. It's a closed list\n (though anyone can post) and security related bug reports are\n treated in confidence until the impact has been established.\n\n\nCredits:\n\n The vulnerability was discovered by Matthew Daley.\n\n\nRevision history:\n\n 2014-08-26 11:54 GMT Initial Report\n 2014-08-26 18:28 GMT CVE Assignment\n 2014-08-27 15:18 GMT Patches and Packages Released",
+  "published": "2014-08-28T00:00:00Z",
+  "modified": "2014-08-28T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.0"
+            },
+            {
+              "fixed": "3.3.13"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.4"
+            },
+            {
+              "fixed": "3.4.7"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2014_2.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-3609"
+    }
+  ]
+}

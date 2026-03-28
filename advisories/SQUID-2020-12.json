@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2020:12",
+  "aliases": [
+    "GHSA-rgf3-9v3p-qp82",
+    "CVE-2021-28116"
+  ],
+  "summary": "Out-Of-Bounds memory access in WCCPv2",
+  "details": "Due to an out of bounds memory access Squid is vulnerable to an\n information leak vulnerability when processing WCCPv2 messages.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a WCCPv2 sender to corrupt Squids list of\n known WCCP routers and divert client traffic to attacker\n  controlled routers.\n\n This attack is limited to Squid proxy with WCCPv2 enabled and\n IP spoofing of a router IP address configured as trusted in\n squid.conf.\n\nCVSS Score of 7.7\n<https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector=AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:N/E:X/RL:O/RC:C/CR:H/IR:H/AR:X/MAV:N/MAC:H/MPR:N/MUI:X/MS:U/MC:H/MI:H/MA:X&version=3.1>\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid versions 4.17 and 5.2.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 4:\n <http://www.squid-cache.org/Versions/v4/SQUID-2020_12.patch>\n\n#### Squid 5:\n <http://www.squid-cache.org/Versions/v5/SQUID-2020_12.patch>\n\n If you are using a prepackaged version of Squid then please\n refer to the package vendor for availability information on\n updated packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n All Squid built with --disable-wccpv2 are not vulnerable.\n\n All Squid-3.x up to and including 3.5.28 built with\n --enable-wccpv2 and configured with wccp2_router in squid.conf\n are vulnerable.\n\n All Squid-3.x up to and including 3.5.28 built without\n --disable-wccpv2 and configured with wccp2_router in squid.conf\n are vulnerable.\n\n All Squid-4.x up to and including 4.16 built with\n --enable-wccpv2 and configured with wccp2_router in squid.conf\n are vulnerable.\n\n All Squid-4.x up to and including 4.16 built without\n --disable-wccpv2 and configured with wccp2_router in squid.conf\n are vulnerable.\n\n All Squid-5.x up to and including 5.1 built with\n --enable-wccpv2 and configured with wccp2_router in squid.conf\n are vulnerable.\n\n All Squid-5.x up to and including 5.1 built without\n --disable-wccpv2 and configured with wccp2_router in squid.conf\n are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\nEither,\n\nThe following network security Best Practices will greatly\nrestrict the ability of any attacker utilizing this\nvulnerability. They can be considered workarounds for this\nissue:\n\n * Use Private IP address for control communications (eg WCCPv2)\n   with routers.\n\n * Firewall restriction of UDP traffic on port 2048 and any\n   other UDP ports used for WCCP(v2) control messages to only\n   permit known devices to communicate with WCCP(v2).\n\n   Note that ports used by clients and diverted by WCCP (eg 80\n   or 443) are not relevant.\n\n * Ensure the network implements BCP 38 spoofing protection.\n   Include protection against LAN traffic spoofing as much as\n   possible.\n   See also <http://www.bcp38.info> and <https://tools.ietf.org/html/bcp38>.\n\nOr,\n\n Build Squid with --disable-wccpv2\n\nOr,\n\n Remove all lines for wccp2_* directives from squid.conf.\n The default configuration is not to enable WCCPv2.\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is\n your primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by Lyu working with Trend\n Micro Zero Day Initiative.\n\n Fixed by Amos Jeffries of Treehouse Networks Ltd.\n\n__________________________________________________________________\n\n### Revision history:\n\n 2020-08-17 10:43:36 UTC Initial Report\n 2021-02-09 00:00:00 UTC Advisory Release by ZDI\n 2021-10-03 00:00:00 UTC Packages Released\n\n__________________________________________________________________\nEND",
+  "published": "2021-10-04T01:35:36Z",
+  "modified": "2023-10-23T09:35:14Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "2.6.STABLE1"
+            },
+            {
+              "last_affected": "3.5.28"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "4.0"
+            },
+            {
+              "fixed": "4.17"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "5.0"
+            },
+            {
+              "fixed": "5.2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-rgf3-9v3p-qp82"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28116"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-rgf3-9v3p-qp82"
+    }
+  ]
+}

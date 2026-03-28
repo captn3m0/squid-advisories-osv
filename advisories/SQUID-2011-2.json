@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2011:2",
+  "aliases": [],
+  "summary": "Password truncation in NCSA using DES",
+  "details": "Problem Description:\n\n DES algorithm implemented by htpasswd and crypt() in some popular\n encryption libraries silently truncates passwords. Squid NCSA\n authentication helper permits long and complex passwords to be\n used with DES despite this well known issue. Leaving users with\n a false view of their security.\n\n\nSeverity:\n\n This problem hides potential security issues and allows attackers\n to bypass security controls relying on long and hard to guess\n passwords.\n\n\nUpdated Packages:\n\n This bug is fixed by Squid version 3.2.0.11.\n\n Squid version 3.1.15 and 3.0.STABLE26 contain a partial fix.\n To allow a period of transition for administrators of large\n networks this release contains a helper which ALERTS in cache.log\n but does not block user logins.\n\n In addition, patches addressing this problem can be found in our\n patch archives.\n\nSquid 3.0: (transitional protection)\n http://www.squid-cache.org/Versions/v3/3.1/changesets/squid-3.0-9194.patch\n\nSquid 3.1: (transitional protection)\n http://www.squid-cache.org/Versions/v3/3.1/changesets/squid-3.1-10356.patch\n\nSquid 3.2: (full protection)\n http://www.squid-cache.org/Versions/v3/3.2/changesets/squid-3.2-11271.patch\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n Squid and its cache are not harmed by this vulnerability. The\n issue is limited to the NCSA helper and potential third-party\n access to protected resources.\n\n ncsa_auth or basic_ncsa_auth helpers bundled with Squid releases\n up to 3.2.0.11 are vulnerable.\n\n The helpers bundled with 3.1.15 and 3.0.STABLE26 will warn\n loudly when this vulnerability is encountered by any user, but\n will allow login to proceed.\n\n\nManual vulnerability test of the helper:\n\n * create a user account with 9-character password:\n\n     # htpasswd -b /test test 123456789\n\n * run the helper and enter the test credentials,\n   both truncated to 8 characters and in full:\n\n     # ncsa_auth /test\n     test 12345678\n     test 123456789\n\n If the helper produces \"OK\" to both of these it is vulnerable.\n\n If the helper produces \"ERR\" to either one it is not vulnerable.\n\n\n The htpasswd -m option affects the vulnerability. When -m is used\n long passwords are stored in a more secure MD5 hash which is not\n vulnerable.\n\n\nWorkarounds:\n\n Use the -m option on htpasswd when encrypting credentials.\n\n Ensuring that MD5 encryption is used by all tools updating the\n credentials file.\n\n The most secure implementation of these requirements is to use\n salted MD5 with magic strings to encrypt the passwords.\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If your install and build Squid from the original Squid sources\n then the squid-users@squid-cache.org mailing list is your primary\n support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@squid-cache.org mailing list. It's a closed list\n (though anyone can post) and security related bug reports are\n treated in confidence until the impact has been established.\n\n\nCredits:\n\n The vulnerability was reported by Gaiar Mukhetdinov \"Indarien\"\n\n\nRevision history:\n\n 2011-08-27 11:05 GMT Initial Version\n 2011-08-27 17:31 GMT Update to include 3.0.STABEL26 release\n 2011-08-29 07:39 GMT Update reporter name",
+  "published": "2011-08-27T00:00:00Z",
+  "modified": "2011-08-27T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.0"
+            },
+            {
+              "fixed": "3.0.STABLE26"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.1"
+            },
+            {
+              "fixed": "3.1.15"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.2"
+            },
+            {
+              "fixed": "3.2.0.11"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2011_2.txt"
+    }
+  ]
+}

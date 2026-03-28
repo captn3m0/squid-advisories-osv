@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2020:3",
+  "aliases": [
+    "CVE-2020-8517"
+  ],
+  "summary": "Improper Input Validation in HTTP Request processing",
+  "details": "Problem Description:\n\n Due to incorrect buffer management ext_lm_group_acl is vulnerable\n to a denial of service attack when processing NTLM Authentication\n credentials.\n\n\nSeverity:\n\n This problem is limited to installations using the\n ext_lm_group_acl binary.\n\n Due to incorrect input validation the NTLM authentication\n credentials parser in ext_lm_group_acl may write to memory\n outside the credentials buffer.\n\n On systems with memory access protections this can result in\n the the helper process being terminated unexpectedly. Resulting\n in Squid process also terminating and a denial of service for\n all clients using the proxy.\n\n\nUpdated Packages:\n\n This bug is fixed by ext_lm_group_acl from Squid version 4.10.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\nSquid 3.5:\n <http://www.squid-cache.org/Versions/v3/3.5/changesets/squid-3.5-c62d2b43ad4962ea44aa0c5edb4cc99cb83a413d.patch>\n\nSquid 4:\n <http://www.squid-cache.org/Versions/v4/SQUID-2020_3.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\nThe helper was shipped as mswin_check_lm_group with Squid-3.1 and\nolder. Also as a third-party helper prior to Squid-2.6.\n\n All Squid using the mswin_check_lm_group helper for group\n based authorization are vulnerable.\n\n\n All Squid not using the ext_lm_group_acl helper for group\n based authorization are not vulnerable.\n\n All Squid-3.x up to and including 3.5.28 being used for NTLM\n Authentication with ext_lm_group_acl helper are vulnerable.\n\n All Squid-4.x up to and including 4.9 being used for NTLM\n Authentication with ext_lm_group_acl helper are vulnerable.\n\n\nTo determine whether Squid-3.2 and later are configured to use\nthe affected helper use the commands:\n\n squid -k parse | grep ext_lm_group_acl\n\n squid -k parse | grep mswin_check_lm_group\n\n\nTo determine whether Squid-3.1 and older are configured to use\nthe affected helper use the commands:\n\n grep ext_lm_group_acl /etc/squid/squid.conf\n\n grep mswin_check_lm_group /etc/squid/squid.conf\n\n\nWorkarounds:\n\nEither;\n\n Remove 'auth_param NTLM ...' configuration settings from\n squid.conf.\n\nOr,\n\n Use ext_lm_group_acl binary built from Squid-4.10 or later\n versions.\n\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If your install and build Squid from the original Squid sources\n then the squid-users@lists.squid-cache.org mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@lists.squid-cache.org mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n\nCredits:\n\n This vulnerability was discovered and fixed by Aaron Costello\n <aaron.costello@ymail.com>.\n\n\nRevision history:\n\n 2019-11-11 10:25:02 UTC Initial Report\n 2019-11-22 02:44:29 UTC Patches Released",
+  "published": "2020-04-01T00:00:00Z",
+  "modified": "2020-04-01T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "2.0"
+            },
+            {
+              "last_affected": "2.7.STABLE9"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.0"
+            },
+            {
+              "last_affected": "3.5.28"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "4.0"
+            },
+            {
+              "fixed": "4.10"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2020_3.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8517"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2016:3",
+  "aliases": [
+    "CVE-2016-3947"
+  ],
+  "summary": "Buffer overrun in pinger ICMPv6 processing",
+  "details": "Problem Description:\n\n Due to a buffer overrun Squid pinger binary is vulnerable to\n denial of service or information leak attack when processing\n ICMPv6 packets.\n\n This bug also permits the server response to manipulate other\n ICMP and ICMPv6 queries processing to cause information leak.\n\nSeverity:\n\n This bug allows any remote server to perform a denial of service\n attack on the Squid service by crashing the pinger. This may\n affect Squid HTTP routing decisions. In some configurations,\n sub-optimal routing decisions may result in serious service\n degradation or even transaction failures.\n\n If the system does not contain buffer-overrun protection leading\n to that crash this bug will instead allow attackers to leak\n arbitrary amounts of information from the heap into Squid log\n files. This is of higher importance than usual because the pinger\n process operates with root priviliges.\n\nUpdated Packages:\n\n This bug is fixed by Squid version 3.5.15 and 4.0.8.\n\n In addition, patches addressing this problem for stable releases\n can be found in our patch archives:\n\nSquid 3.1:\n http://www.squid-cache.org/Versions/v3/3.1/changesets/squid-3.1-10495.patch\n\nSquid 3.2:\n http://www.squid-cache.org/Versions/v3/3.2/changesets/squid-3.2-11839.patch\n\nSquid 3.3:\n http://www.squid-cache.org/Versions/v3/3.3/changesets/squid-3.3-12694.patch\n\nSquid 3.4:\n http://www.squid-cache.org/Versions/v3/3.4/changesets/squid-3.4-13232.patch\n\nSquid 3.5:\n http://www.squid-cache.org/Versions/v3/3.5/changesets/squid-3.5-14015.patch\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n All Squid-2.x versions are not vulnerable to this problem.\n\n All Squid-3.0 versions are not vulnerable to this problem.\n\n All Squid built with --disable-icmp are not vulnerable to this\n problem.\n\n All Squid built with --disable-ipv6 are not vulnerable to this\n problem.\n\n All Squid-3.x configured with \"pinger_enable off\" in squid.conf\n are not vulnerable to this problem.\n\n Check the server running processes list to determine if the Squid\n service is running a \"pinger\" child process.\n\n All unpatched Squid-3 versions up to and including 3.5.15\n running the pinger process are vulnerable to this problem.\n\n All unpatched Squid-4 versions up to and including 4.0.7\n running the pinger process are vulnerable to this problem.\n\n\nWorkaround:\n\n Disable the pinger process in squid.conf:\n\n   pinger_enable off\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If your install and build Squid from the original Squid sources\n then the squid-users@lists.squid-cache.org mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@lists.squid-cache.org mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n\nCredits:\n\n The vulnerability was reported and fixed by Yuriy M. Kaminskiy.\n\n\nRevision history:\n\n 2016-02-21 23:42:28 GMT Initial Report\n 2016-03-28 22:52:58 GMT Patch Released",
+  "published": "2016-04-02T00:00:00Z",
+  "modified": "2016-04-02T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.1.0"
+            },
+            {
+              "fixed": "3.5.16"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "4.0"
+            },
+            {
+              "fixed": "4.0.8"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2016_3.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3947"
+    }
+  ]
+}

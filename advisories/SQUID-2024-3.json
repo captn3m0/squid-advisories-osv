@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2024:3",
+  "aliases": [
+    "GHSA-wgvf-q977-9xjg",
+    "CVE-2024-37894"
+  ],
+  "summary": "Denial of Service in ESI processing",
+  "details": "__________________________________________________________________\n\n### Squid Proxy Cache Security Update Advisory SQUID-2024:3\n__________________________________________________________________\n|||\n| ------------------ | ---\nAdvisory ID:       | SQUID-2024:3\nDate:              | Jun 10, 2024\nSummary:           | Denial of Service in ESI processing\nAffected versions: | Squid  3.0 -> 3.5.28\n|                  | Squid 4.0 -> 4.16\n|                  | Squid 5.0 -> 5.9\n|                  | Squid 6.0 -> 6.9\nFixed in version:  | Squid 6.10\n__________________________________________________________________\n\n### Problem Description:\n\nDue to an Out-of-bounds Write error when assigning ESI variables,\nSquid is susceptible to a Memory Corruption error, which can\nresult in a Denial of Service.\n\n__________________________________________________________________\n\n### Severity:\n\nThis problem allows a trusted server to perform a Denial of Service attack on\nSquid while processing ESI response content.\nThis affects all domains being serviced by the proxy and all clients using\nit during the affected period.\n\nThe trigger for this issue are values which clients might normally expect to use\nin valid ESI response content. As such admin should expect this issue to be\nalready occurring without any malicious 0-day attack existing.\n\nThis issue is limited to Squid acting as reverse proxy where ESI feature has been\nenabled at build time\n\nCVSS Score of 6.3\n<https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector=CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:N/I:N/A:H&version=3.1>\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid version 6.10.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 3.x, 4, or 5:\n <https://github.com/squid-cache/squid/commit/f411fe7d75197852f0e5ee85027a06d58dd8df4c.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n All Squid built with --disable-esi are not vulnerable.\n\n All Squid-3.0 versions built without --enable-esi are not\n vulnerable.\n\n All Squid-3.x versions built with --enable-esi are vulnerable.\n\n All Squid-4.x built with --enable-esi are vulnerable.\n\n All Squid-5.x built with --enable-esi are vulnerable.\n\n All Squid-6.x up to and including 6.9 built with --enable-esi\n are vulnerable\n\n__________________________________________________________________\n\n### Workaround:\n\nBuild Squid with --disable-esi\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\nThis vulnerability was discovered by Joshua Rogers of Opera Software.\n\nFixed by Francesco Chemolli <kinkie@squid-cache.org>\n\n__________________________________________________________________\n\n### Revision history:\n\n2021-03-01 23:06:11 UTC Initial Report\n2024-06-02 14:00:00 UTC Patches released\n2024-06-10 14:00:00 UTC Fixed packages released\n__________________________________________________________________\nEND",
+  "published": "2024-06-25T08:36:16Z",
+  "modified": "2024-06-27T08:13:19Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.0"
+            },
+            {
+              "last_affected": "6.9"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:C/C:N/I:N/A:H"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-wgvf-q977-9xjg"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-37894"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-wgvf-q977-9xjg"
+    }
+  ]
+}

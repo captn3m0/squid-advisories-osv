@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2015:2",
+  "aliases": [
+    "CVE-2015-5400"
+  ],
+  "summary": "Improper Protection of Alternate Path",
+  "details": "Problem Description:\n\n Squid configured with cache_peer and operating on explicit proxy\n traffic does not correctly handle CONNECT method peer responses.\n\n\nSeverity:\n\n The bug is important because it allows remote clients to bypass\n security in an explicit gateway proxy.\n\n However, the bug is exploitable only if you have configured\n cache_peer to receive CONNECT requests.\n\n\nUpdated Packages:\n\n This bug is fixed by Squid version 3.5.6.\n\n In addition, patches addressing this problem for stable releases\n can be found in our patch archives:\n\nSquid 3.1:\nhttp://www.squid-cache.org/Versions/v3/3.1/changesets/squid-3.1-10494.patch\n\nSquid 3.4:\nhttp://www.squid-cache.org/Versions/v3/3.4/changesets/squid-3.4-13225.patch\n\nSquid 3.5:\nhttp://www.squid-cache.org/Versions/v3/3.5/changesets/squid-3.5-13856.patch\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n All Squid versions with cache_peer omitted from squid.conf are\n not vulnerable to the problem.\n\n All Squid versions with squid.conf containing\n \"nonhierarchical_direct on\" are not vulnerable to the problem.\n\n All Squid-3.1 and later with nonhierarchical_direct omitted from\n squid.conf are not vulnerable to the problem.\n\n All other unpatched Squid configured to use a cache_peer without\n the \"originserver\" option are vulnerable to the problem.\n\n\nWorkaround:\n\n For Squid-3.0 and older ensure squid.conf contains\n \"nonhierarchical_direct on\".\n\n For Squid-3.1 and newer remove nonhierarchical_direct from\n squid.conf.\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the squid-users@lists.squid-cache.org mailing list is your\n primary support point. For subscription details see\n http://www.squid-cache.org/Support/mailing-lists.html.\n\n For reporting of non-security bugs in the latest release\n the squid bugzilla database should be used\n http://bugs.squid-cache.org/.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@lists.squid-cache.org mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n\nCredits:\n\n The vulnerability was reported and fixed by Alex Rousskov, The\n Measurement Factory.\n\n Squid-3.1 backport by Rapha\u00ebl Hertzog, Debian Project.\n\n\nRevision history:\n\n 2015-06-16 16:54 GMT Initial Report and Patches Released\n 2015-05-03 15:37 GMT Packages Released\n 2015-07-17 14:09 GMT CVE Assigment\n 2015-07-30 15:57 GMT Patch for 3.1 added",
+  "published": "2015-07-06T00:00:00Z",
+  "modified": "2015-07-06T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "0.0"
+            },
+            {
+              "fixed": "3.5.6"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2015_2.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2015-5400"
+    }
+  ]
+}

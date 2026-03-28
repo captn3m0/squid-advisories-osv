@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2023:2",
+  "aliases": [
+    "GHSA-543m-w2m2-g255",
+    "CVE-2023-5824"
+  ],
+  "summary": "Multiple issues in HTTP response caching",
+  "details": "Due to an Improper Handling of Structural Elements\n bug Squid is vulnerable to a Denial of Service\n attack against HTTP and HTTPS clients.\n\n Due to an Incomplete Filtering of Special Elements\n bug Squid is vulnerable to a Denial of Service\n attack against HTTP and HTTPS clients.\n\n__________________________________________________________________\n\n### Severity:\n\n The limits applied for validation of HTTP Response headers are\n applied before caching. Different limits may be in place at the\n later cache HIT usage of that response.\n\n The limits applied for validation of HTTP Response headers are\n applied to each received server response. Squid may grow a cached\n HTTP Response header with HTTP 304 updates beyond the configured\n maximum header size.\n\n Subsequent parsing to de-serialize a large header from disk cache\n can stall or crash the worker process. Resulting in Denial of\n Service to all clients using the proxy.\n\nCVSS Score of 9.6\n<https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector=AV:N/AC:L/PR:L/UI:N/S:C/C:N/I:H/A:H&version=3.1>\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid version 6.4.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 6:\n <http://www.squid-cache.org/Versions/v6/SQUID-2023_2.patch>\n <http://www.squid-cache.org/Versions/v6/SQUID-2023_2_b.patch>\n <http://www.squid-cache.org/Versions/v6/SQUID-2023_2_c.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n Squid older than v5 have not been tested and are presumed\n vulnerable.\n\n Squid v5.x up to and including 5.9 are vulnerable.\n\n Squid v6.x up to and including 6.3 are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\n Disable disk caching by removing all cache_dir directives from\n squid.conf.\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <https://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was independently discovered by Joshua Rogers\n of Opera Software and by The Measurement Factory.\n\n Fixed by The Measurement Factory.\n\n__________________________________________________________________\n\n### Revision history:\n\n2019-09-11: Initial report of header growth caused by HTTP 304.\n2021-03-04: Initial report of caching of huge response headers.\n2023-04-28 02:40:03 UTC Initial patches released.\n2023-11-01 22:28:57 UTC Additional Squid-6 patches released.\n\n_________________________________________________________________\nEND",
+  "published": "2023-10-21T11:30:38Z",
+  "modified": "2023-11-04T06:38:47Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "0"
+            },
+            {
+              "fixed": "6.4"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:C/C:N/I:H/A:H"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-543m-w2m2-g255"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-5824"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-543m-w2m2-g255"
+    }
+  ]
+}

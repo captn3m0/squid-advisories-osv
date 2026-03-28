@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2020:11",
+  "aliases": [
+    "GHSA-jvf6-h9gj-pmj6",
+    "CVE-2020-25097"
+  ],
+  "summary": "HTTP Request Smuggling",
+  "details": "Due to improper input validation Squid is vulnerable to an HTTP\n Request Smuggling attack.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a trusted client to perform HTTP Request\n Smuggling and access services otherwise forbidden by Squid\n security controls.\n\nCVSS Score of 9.3\n<https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector=AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N/E:F/RL:O/RC:C/CR:H/IR:X/AR:X/MAV:N/MAC:L/MPR:N/MUI:N/MS:C/MC:H/MI:X/MA:X&version=3.1>\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid versions 4.14 and 5.0.5.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 4:\n <http://www.squid-cache.org/Versions/v4/SQUID-2020_11.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n\n All Squid with squid.conf containing \"uri_whitespace deny\" are\n not vulnerable.\n\n All Squid with squid.conf containing \"uri_whitespace encode\" are\n not vulnerable.\n\n All Squid-4.x up to and including 4.13 without uri_whitespace in\n squid.conf are vulnerable.\n\n All Squid-4.x up to and including 4.13 with uri_whitespace in\n squid.conf configured to \"allow\" are vulnerable.\n\n All Squid-4.x up to and including 4.13 with uri_whitespace in\n squid.conf configured to \"chop\" are vulnerable.\n\n All Squid-4.x up to and including 4.13 with uri_whitespace in\n squid.conf configured to \"strip\" are vulnerable.\n\n All Squid-5.x up to and including 5.0.4 without uri_whitespace\n in squid.conf are vulnerable.\n\n All Squid-5.x up to and including 5.0.4 with uri_whitespace in\n squid.conf configured to \"allow\" are vulnerable.\n\n All Squid-5.x up to and including 5.0.4 with uri_whitespace in\n squid.conf configured to \"chop\" are vulnerable.\n\n All Squid-5.x up to and including 5.0.4 with uri_whitespace in\n squid.conf configured to \"strip\" are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\nEither,\n\n  Configure squid.conf with uri_whitespace deny\n\nOr,\n\n  Configure squid.conf with uri_whitespace encode\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by Jianjun Chen from ICSI,\n Berkeley.\n\n Fixed by Amos Jeffries of Treehouse Networks Ltd and\n Alex Rousskov of The Measurement Factory.\n\n__________________________________________________________________\n\n### Revision history:\n\n 2020-09-01 03:58:36 UTC Initial Report\n 2020-09-03 03:03:24 UTC CVE Allocation\n 2020-09-04 04:38:30 UTC Patches released",
+  "published": "2021-03-04T14:49:37Z",
+  "modified": "2023-10-23T08:46:34Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "2.0"
+            },
+            {
+              "last_affected": "4.13"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "5.0.1"
+            },
+            {
+              "fixed": "5.0.5"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-jvf6-h9gj-pmj6"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25097"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-jvf6-h9gj-pmj6"
+    }
+  ]
+}

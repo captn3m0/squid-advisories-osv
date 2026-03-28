@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2012:1",
+  "aliases": [
+    "CVE-2012-5643",
+    "CVE-2013-0189"
+  ],
+  "summary": "Denial of Service in cachemgr.cgi",
+  "details": "Problem Description:\n\n Due to missing input validation Squid cachemgr.cgi tool is\n vulnerable to a denial of service attack when processing\n specially crafted requests.\n\n\nSeverity:\n\n This problem allows any client able to reach the cachemgr.cgi\n to perform a denial of service attack on the service host.\n\n The nature of the attack may cause secondary effects through\n resource consumption on the host server.\n\n\nUpdated Packages:\n\n This bug is fixed by Squid versions 3.2.6 and 3.3.0.3\n\n In addition, patches addressing this problem for stable releases\n can be found in our patch archives:\n\nSquid 2.7:\nhttp://www.squid-cache.org/Versions/v2/2.7/changesets/SQUID-2012_1.patch\n\nSquid 3.1:\nhttp://www.squid-cache.org/Versions/v3/3.1/changesets/SQUID-2012_1.patch\n\nSquid 3.2:\nhttp://www.squid-cache.org/Versions/v3/3.2/changesets/SQUID-2012_1.patch\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n Squid proxy is not vulnerable. The problem is isolated to the\n manager CGI interface tool.\n\n\n cachemgr.cgi tool displays its version number in the HTML pages\n with a version number:\n\n  All 2.x versions up to and including 2.7.STABLE9 are vulnerable.\n\n  All 3.x versions up to and including 3.1.22 are vulnerable.\n\n  All 3.2 versions up to and including 3.2.5 are vulnerable.\n\n  All 3.3 beta versions up to and including 3.3.0.2 are vulnerable.\n\n  All 3.x versions newer than the above are not vulnerable.\n\n\nWorkaround:\n\n Add access controls to the host web server limiting which clients\n can send requests to the CGI tool.\n\nor,\n\n Add server limits to CGI process memory consumption to the\n host web server running cachemgr.cgi.\n\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then thesquid-users@squid-cache.org  mailing list is your primary\n support point. For subscription details see\n http://www.squid-cache.org/Support/mailing-lists.html.\n\n For reporting of non-security bugs in the latest release\n the squid bugzilla database should be used\n http://bugs.squid-cache.org/.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@squid-cache.org  mailing list. It's a closed list\n (though anyone can post) and security related bug reports are\n treated in confidence until the impact has been established.\n\n\nCredits:\n\n The vulnerability was discovered by Coverity Scan Project.\n\n Additional flaws discovered by Seth Arnold, Cannocal Ltd. and\n Saran Neti, TELUS Security Labs and Eygene Ryabinkin, FreeBSD.\n\n\nRevision history:\n\n 2012-10-29 12:47 --- Initial Detection\n 2012-11-15 03:05 GMT Patches Released\n 2012-12-17 06:20 GMT Advisory Released\n 2012-12-18 22:17 GMT Additional flaw identified\n 2012-12-21 21:38 GMT Additional flaw identified\n 2013-01-01 06:50 GMT Updated patches and advisory released\n 2013-01-09 02:50 GMT Updated packages released\n 2013-01-21 00:00 GMT Squid-2.7 patch released\n 2013-03-08 00:39 GMT Updated CVE references",
+  "published": "2012-12-17T00:00:00Z",
+  "modified": "2012-12-17T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "2.0"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.0"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.1"
+            },
+            {
+              "fixed": "3.1.23"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.2"
+            },
+            {
+              "fixed": "3.2.6"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.3"
+            },
+            {
+              "fixed": "3.3.0.3"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2012_1.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-5643"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-0189"
+    }
+  ]
+}

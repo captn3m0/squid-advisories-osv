@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2024:1",
+  "aliases": [
+    "GHSA-72c2-c3wm-8qxc",
+    "CVE-2024-25111"
+  ],
+  "summary": "Denial of Service in HTTP Chunked Decoding",
+  "details": "Due to an Uncontrolled Recursion bug, Squid may be vulnerable to\n a Denial of Service attack against HTTP Chunked decoder.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a remote attacker to perform Denial of\n Service when sending a crafted chunked encoded HTTP Message.\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid version 6.8.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 6:\n <http://www.squid-cache.org/Versions/v6/SQUID-2024_1.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n Squid older than 3.5.27 are not vulnerable.\n\n All Squid 3.5.27 to 4.17 have not been tested and should be\n assumed to be vulnerable.\n\n All Squid-5.x up to and including 5.9 are vulnerable.\n\n All Squid-6.x up to and including 6.7 are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\n  **There is no workaround for this issue**\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <https://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by Joshua Rogers of Opera\n Software.\n\n Fixed by The Measurement Factory.\n\n__________________________________________________________________\n\n### Revision history:\n\n 2023-10-12 11:53:02 UTC Initial Report\n 2023-10-31 11:35:02 UTC Patches Released\n 2024-03-04 06:27:00 UTC Fixed Version Released\n__________________________________________________________________\nEND",
+  "published": "2024-03-05T03:49:04Z",
+  "modified": "2024-03-05T03:49:04Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.5.27"
+            },
+            {
+              "last_affected": "6.7"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-72c2-c3wm-8qxc"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-25111"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-72c2-c3wm-8qxc"
+    }
+  ]
+}

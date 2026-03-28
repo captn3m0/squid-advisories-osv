@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2007:2",
+  "aliases": [],
+  "summary": "Denial of Service in cache updates",
+  "details": "Problem Description:\n\n Due to incorrect bounds checking Squid is vulnerable to\n a denial of service check during some cache update reply\n processing.\n\n\nSeverity:\n\n This problem allows any client trusted to use the service to\n perform a denial of service attack on the Squid service.\n\n\nUpdated Packages:\n\n This bug is fixed by Squid version 2.6.STABLE18 and by the January\n 09 snapshots of Squid-2 and November 28 snapshot of Squid-3.\n\n In addition, the two patches addressing this problem can be found in\n our patch archive for version Squid-2.6:\n\n  http://www.squid-cache.org/Versions/v2/2.6/changesets/11780.patch (Nov 28)\n  http://www.squid-cache.org/Versions/v2/2.6/changesets/11882.patch (Jan 09)\n\n And the patch for Squid-3:\n\n  http://www.squid-cache.org/Versions/v3/3.0/changesets/11211.patch (Nov 28)\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n Note: Earlier version of this advisory said November 28 / 2.6.STABLE17\n for Squid-2.6, but that patch was incomplete and did not fully\n address the issue.\n\nDetermining if your version is vulnerable:\n\n All Squid-2.X versions up to, and including 2.6.STABLE17 are\n vulnerable.\n\n All Squid-3 snapshots and prereleases up to the November 28\n snapshot are vulnerable.\n\n\nWorkarounds:\n\n There are no workarounds.\n\n\nThanks to:\n\n Thanks go to the Wikimedia Foundation for helping identify the issue\n and testing the proposed resolution of the issue.\n\n Thanks to Adrian Chadd for the Squid-2 fix.\n\n Thanks to Henrik Nordstrom for the Squid-3 fix.\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If your install and build Squid from the original Squid sources\n then the squid-users@squid-cache.org mailing list is your primary\n support point. See <http://www.squid-cache.org/Support/mailing-lists.html>\n for subscription details.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@squid-cache.org mailing list. It's a closed list\n (though anyone can post) and security related bug reports are\n treated in confidence until the impact has been established.\n\n\nRevision history:\n\n 2007-11-26 14:40 GMT+9 Initial version\n 2008-03-21 23:55 GMT   Squid-2.6.STABLE17 issue mentioned, bumping\n\t\t\tfixed to 2.6.STABLE18\n 2010-09-16 07:05 GMT Reference link updates",
+  "published": "2007-12-04T00:00:00Z",
+  "modified": "2007-12-04T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "2.0"
+            },
+            {
+              "fixed": "2.6.STABLE18"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2007_2.txt"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2026:3",
+  "aliases": [
+    "GHSA-84p4-hcx7-jj7c",
+    "CVE-2026-33515"
+  ],
+  "summary": "Out of Bounds Read in ICP message handling",
+  "details": "Due to [improper input validation](https://cwe.mitre.org/data/definitions/20.html)\n bugs, Squid is vulnerable to [out of bounds reads](https://cwe.mitre.org/data/definitions/125.html)\n when handling ICP traffic.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a remote attacker to\n receive small amounts of memory potentially containing sensitive\n information when responding with errors to invalid ICP requests.\n\n This attack is limited to Squid deployments that explicitly\n enable ICP support (i.e. configure non-zero `icp_port`).\n\n This problem _cannot_ be mitigated by denying ICP queries\n using `icp_access` rules.\n\n__________________________________________________________________\n\n### Updated Packages\n\n These bugs were fixed in Squid version 7.5.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 7:\n <https://github.com/squid-cache/squid/commit/8138e909d2058d4401e0ad49b583afaec912b165>\n\nNote: we are aware this patch may not apply cleanly.\n  Ensure that the patch for [SQUID-2026:1](https://github.com/squid-cache/squid/security/advisories/GHSA-hpfx-h48q-gvwg)\n  is applied first.\n\n If you are using a prepackaged version of Squid then please\n refer to the package vendor for availability information on\n updated packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable\n\n Run the following command to identify whether your Squid\n has been configured with ICP enabled:\n\n  `squid -k parse 2>&1 | grep -E \"(icp|udp)_port\" | tail -n1`\n\n All Squid configured with port 0 are not vulnerable.\n\n All Squid-3.0 up to and including 7.4 configured with\n a non-zero port should be assumed to be vulnerable.\n\n All Squid-3.2 up to and including 7.4 configured without\n any port value can be assumed to be not vulnerable.\n\n__________________________________________________________________\n\n### Workaround\n\nEither,\n\n  * Do not enable ICP support,\n\nOr,\n\n * explicitly disable ICP using `icp_port 0`.\n\n\n Warning: These problems _cannot_ be mitigated by denying ICP\n          queries using `icp_access` rules.\n \n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is\n your primary support point. For subscription details see\n <https://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <https://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits\n\nDiscovered and Fixed by:\n\n * [Joshua Rogers](https://joshua.hu/) with ZeroPath\n * Alex Rousskov, The Measurement Factory\n\n__________________________________________________________________\n\n### Revision history:\n\n2025-09-07 20:22 EDT [Report](https://github.com/squid-cache/squid/pull/2220) of the first set of vulnerabilities\n2026-01-26 08:48 EDT [Report](https://github.com/squid-cache/squid/pull/2220#discussion_r2727683637) of additional vulnerabilities\n2026-02-12 20:28:43 UTC official fixes in master branch\n__________________________________________________________________\nEND",
+  "published": "2026-03-25T04:23:38Z",
+  "modified": "2026-03-25T14:52:10Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "0"
+            },
+            {
+              "fixed": "7.5"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-84p4-hcx7-jj7c"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-33515"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-84p4-hcx7-jj7c"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2021:3",
+  "aliases": [
+    "GHSA-m47m-9hvw-7447",
+    "CVE-2021-28652"
+  ],
+  "summary": "Denial of Service issue in Cache Manager",
+  "details": "Due to an incorrect parser validation bug Squid is vulnerable to\n a Denial of Service attack against the Cache Manager API.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a trusted client to trigger memory leaks\n which over time lead to a Denial of Service against Squid and\n the machine it is operating on.\n\n This attack is limited to clients with Cache Manager API access\n privilege.\n\nCVSS Score of 7.8\nhttps://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector=AV:N/AC:H/PR:H/UI:N/S:C/C:N/I:N/A:H/E:F/RL:O/RC:C/CR:X/IR:X/AR:H/MAV:N/MAC:H/MPR:H/MUI:N/MS:C/MC:X/MI:X/MA:H&version=3.1\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid versions 4.15 and 5.0.6.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 4:\n <http://www.squid-cache.org/Versions/v4/SQUID-2021_3.patch>\n\n#### Squid 5:\n <http://www.squid-cache.org/Versions/v5/SQUID-2021_3.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n Squid older than 3.5.28 have not been tested and should be\n assumed to be vulnerable.\n\n All Squid-4.x up to and including 4.14 are vulnerable.\n\n All Squid-5.x up to and including 5.0.4 are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\nEither,\n\n Disable Cache Manager access entirely if not needed.\n\n Place the following line in squid.conf before lines containing\n \"allow\" :\n \n   http_access deny manager\n\nOr,\n\n Harden Cache Manager access privileges.\n\n For example; require authentication or other access controls in\n http_access beyond the default IP address restriction.\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by Joshua Rogers of Opera\n Software.\n\n Fixed by Amos Jeffries of Treehouse Networks Ltd.\n\n__________________________________________________________________\n\n### Revision history:\n\n 2021-03-03 17:02:25 UTC Initial Report\n 2021-03-16 01:59:45 UTC Patch Released\n 2021-03-17 06:19:09 UTC CVE Assignment\n__________________________________________________________________\nEND",
+  "published": "2021-05-10T11:43:39Z",
+  "modified": "2023-10-23T09:07:24Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "1.0"
+            },
+            {
+              "last_affected": "4.14"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "5.0"
+            },
+            {
+              "fixed": "5.0.6"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:C/C:N/I:N/A:H"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-m47m-9hvw-7447"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28652"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-m47m-9hvw-7447"
+    }
+  ]
+}

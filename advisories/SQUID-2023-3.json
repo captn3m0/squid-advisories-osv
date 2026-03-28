@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2023:3",
+  "aliases": [
+    "GHSA-phqj-m8gv-cq4g",
+    "CVE-2023-46847"
+  ],
+  "summary": "Denial of Service in HTTP Digest Authentication",
+  "details": "Due to a buffer overflow bug Squid is vulnerable to a Denial of\n Service attack against HTTP Digest Authentication\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a remote client to perform buffer overflow\n attack writing up to 2 MB of arbitrary data to heap memory\n when Squid is configured to accept HTTP Digest Authentication.\n\nOn machines with advanced memory protections this will result\nin a Denial of Service against all users of the Squid proxy.\n\nCVSS Score of 9.9\n<https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector=AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:H&version=3.1>\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid version 6.4.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 5:\n <http://www.squid-cache.org/Versions/v5/SQUID-2023_3.patch>\n\n#### Squid 6:\n <http://www.squid-cache.org/Versions/v6/SQUID-2023_3.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n Squid older than 5.0.5 have not been tested and should be assumed\n to be vulnerable.\n\n All Squid-5.0.6 up to and including 5.9 are vulnerable.\n\n All Squid-6.x up to and including 6.3 are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\n  Disable HTTP Digest authentication until Squid can be\n  upgraded or patched.\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <https://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by Joshua Rogers of Opera\n Software.\n\n Fixed by [Alex Bason](https://github.com/nonsleepr).\n\n__________________________________________________________________\n\n### Revision history:\n\n 2021-03-22 00:59:20 UTC Initial Report\n 2023-10-13 17:31:11 UTC Patch Published\n__________________________________________________________________\nEND",
+  "published": "2023-10-21T11:15:23Z",
+  "modified": "2023-11-01T16:55:01Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.2.0.1"
+            },
+            {
+              "last_affected": "5.9"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "6.0"
+            },
+            {
+              "fixed": "6.4"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:L/A:H"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-phqj-m8gv-cq4g"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46847"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-phqj-m8gv-cq4g"
+    }
+  ]
+}

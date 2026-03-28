@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2008:1",
+  "aliases": [
+    "CVE-2004-0918"
+  ],
+  "summary": "Remote Denial of Service in SNMP parser",
+  "details": "Problem Description:\n\n Advisory 2004-3 was fixed in 2.5.STABLE7 and all later 2.x releases,\n but was unfortunately not duplicated in the 3.x branch.\n\n A bug exists in the ASN1 parser used in Squid's SNMP library.  This\n code fails to fully validate certain fields in SNMP queries.  A\n specially-crafted message may contain negative values, which Squid\n passes to the malloc() function.  This may lead to a segmentation\n violation and cause Squid to restart.\n\n------------------------------------------------------------------\n\nSeverity:\n\n The bug is significant because it forces squid to restart, thus\n disrupting active transactions.  The buggy code is executed even\n before Squid makes any access control checks (i.e. snmp_access).\n\nUpdated Packages:\n\n The Squid-3.0.STABLE7 release contains a fix for this\n problem. You can download the Squid-3.0.STABLE7 release from\n\n   ftp://ftp.squid-cache.org/pub/archive/3.0/\n   http://www.squid-cache.org/Versions/v3/3.0/\n\n or the mirrors (may take a while before all mirrors are updated).\n For a list of mirror sites see\n\n   http://www.squid-cache.org/Download/ftp-mirrors.html\n   http://www.squid-cache.org/Download/http-mirrors.html\n\n An individual patch for this issues can be found in our\n patch archive for version Squid-3.0.STABLE6:\n\n   http://www.squid-cache.org/Versions/v3/3.0/changesets/b8826.patch\n\n If necessary, this short patch should also apply to any version\n of Squid 3.0 released before June 2008.\n\n If you are using a prepackaged version of Squid then please\n refer to the package vendor for availability information on\n updated packages.\n\n\nDetermining if your version is vulnerable:\n\n This bug is present by default in all 3.0 releases before\n 3.0.STABLE7 since SNMP support is present by default.\n\n However, Squid is vulnerable only if it is listening for SNMP\n queries on a UDP port. The default configuration in 3.0 is for\n the SNMP port to be closed.\n\n Squid is at risk unless built with configure option --disable-snmp.\n\n You can check if squid.conf contains the 'snmp_port' option with\n a non-zero value.\n\n Or if Squid's cache.log file contains the following message:\n\n    Accepting SNMP messages on port 3401, FD nn.\n\n\nWorkarounds:\n\n The best workaround is to close Squid's SNMP port, at least\n temporarily. Close SNMP port by removing the snmp_port directive\n or setting it to '0'.\n\n Note that in 3.0 releases the default SNMP port setting is closed.\n This differs form the original 2004-3 advisory.\n\n\n If your SNMP agent runs on the same host as Squid, use the loopback\n IP address and use a packet filter rule to block SNMP messages\n from outside hosts.  You can bind Squid's SNMP port to the loopback\n address with this directive:\n\n    snmp_incoming_address 127.0.0.1\n\n Restart or reconfigure Squid after editing squid.conf.\n\n\n If your SNMP agent runs on a different host as Squid, configure\n the firewall on your Squid box to only permit SNMP traffic between\n your trusted agent and the Squid SNMP port.\n\n\nContact details for the Squid project:\n\n For installation / upgrade support: Your first point of contact\n should be your binary package vendor.\n\n If your install is built from the original Squid sources, then\n the squid-users@squid-cache.org mailing list is your primary\n support point. (see <http://www.squid-cache.org/Support/mailing-lists.html>\n for subscription details).\n\n For bug reporting, particularly security related bugs the\n squid-bugs@squid-cache.org mailing list is the appropriate forum.\n It's a closed list (though anyone can post) and security related\n bug reports are treated in confidence until the impact has been\n established. For non security related bugs, the squid bugzilla\n database should be used <http://bugs.squid-cache.org/>.\n\n\nCredits:\n\n The vulnerability was reported by iDEFENSE Labs (www.idefense.com).\n\n Henrik Nordstrom developed the patch for snmplib/asn1.c\n\n\nRevision history:\n\n 2004-10-05 00:00 GMT Disclosure of vulnerability by iDEFENSE\n 2004-10-25 02:10 GMT Initial release of 2004-3 document\n 2008-06-26 01:28 GMT Revision for Squid 3.0 regression\n 2008-11-07 00:28 GMT Appended fixed version to summary\n 2010-09-16 07:05 GMT Reference link updates",
+  "published": "2008-06-22T00:00:00Z",
+  "modified": "2008-06-22T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.0.0"
+            },
+            {
+              "fixed": "3.0.STABLE7"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2008_1.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2004-0918"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2023:5",
+  "aliases": [
+    "GHSA-2g3c-pg7q-g59w",
+    "CVE-2023-46848"
+  ],
+  "summary": "Denial of Service in FTP",
+  "details": "Due to an Incorrect Conversion between Numeric Types\n bug Squid is vulnerable to a Denial of Service\n attack against FTP Native Relay input validation.\n\n Due to an Incorrect Conversion between Numeric Types\n bug Squid is vulnerable to a Denial of Service\n attack against ftp:// URL validation and access control.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a remote client to perform Denial of Service\n when sending ftp:// URLs in HTTP Request messages or constructing\n ftp:// URLs from FTP Native input.\n\n This issue is triggered during access control security checks,\n meaning clients may not have been permitted to use the proxy yet.\n\n FTP support is always enabled and cannot be disabled completely.\n\nCVSS Score of 8.6\n<https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector=AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H&version=3.1>\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid version 6.4.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 5:\n <http://www.squid-cache.org/Versions/v5/SQUID-2023_5.patch>\n\n#### Squid 6:\n <http://www.squid-cache.org/Versions/v6/SQUID-2023_5.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n Squid older than 5.0.3 are not vulnerable.\n\n All Squid-5.0.4 up to and including 5.6 are vulnerable.\n\n All Squid-6.x up to and including 6.3 are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\n * The FTP Native Relay input validation vector can be secured by\n   removing all ftp_port directives from squid.conf.\n\n * There are no workarounds to avoid the ftp:// URL validation and\n   access control vector.\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <https://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by Joshua Rogers of Opera\n Software.\n\n Fixed by The Measurement Factory.\n\n__________________________________________________________________\n\n### Revision history:\n\n 2023-10-12 11:53:02 UTC Initial Report\n__________________________________________________________________\nEND",
+  "published": "2023-10-21T21:50:30Z",
+  "modified": "2023-11-01T16:55:21Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "5.0.3"
+            },
+            {
+              "last_affected": "5.9"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "6.0"
+            },
+            {
+              "fixed": "6.4"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-2g3c-pg7q-g59w"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46848"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-2g3c-pg7q-g59w"
+    }
+  ]
+}

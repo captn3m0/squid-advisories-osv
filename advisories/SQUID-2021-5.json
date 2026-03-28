@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2021:5",
+  "aliases": [
+    "GHSA-572g-rvwr-6c7f",
+    "CVE-2021-33620"
+  ],
+  "summary": "Denial of Service in HTTP Response processing",
+  "details": "Due to an input validation bug Squid is vulnerable to a Denial\n of Service against all clients using the proxy.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a remote server to perform Denial of Service\n when delivering HTTP Response messages. The issue trigger is a\n header which can be expected to exist in HTTP traffic without\n any malicious intent by the server\n\nCVSS Score of 8.8\n<https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector=AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H/E:P/RL:O/RC:C/CR:X/IR:X/AR:H/MAV:N/MAC:L/MPR:L/MUI:N/MS:C/MC:X/MI:X/MA:H&version=3.1>\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid versions 4.15 and 5.0.6.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 4:\n <http://www.squid-cache.org/Versions/v4/SQUID-2021_5.patch>\n\n#### Squid 5:\n <http://www.squid-cache.org/Versions/v5/SQUID-2021_5.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n Squid older than 4.15 have not been tested and should be\n assumed to be vulnerable.\n\n All Squid-5.x up to and including 5.0.5 are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\n There are no known workarounds to this issue.\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by Joshua Rogers of Opera\n Software.\n\n Fixed by Alex Rousskov of The Measurement Factory.\n\n__________________________________________________________________\n\n### Revision history:\n\n 2021-03-05 22:11:43 UTC Initial Report\n 2021-05-28 11:29:59 UTC CVE Assignment\n__________________________________________________________________\nEND",
+  "published": "2021-05-10T11:56:12Z",
+  "modified": "2023-10-23T08:34:45Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "0"
+            },
+            {
+              "fixed": "4.15"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "5.0"
+            },
+            {
+              "fixed": "5.0.6"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-572g-rvwr-6c7f"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-33620"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-572g-rvwr-6c7f"
+    }
+  ]
+}

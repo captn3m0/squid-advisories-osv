@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2023:10",
+  "aliases": [
+    "GHSA-wgq4-4cfg-c4x3",
+    "CVE-2023-50269"
+  ],
+  "summary": "Denial of Service in HTTP Request parsing",
+  "details": "Due to an Uncontrolled Recursion bug, Squid may be vulnerable to\n a Denial of Service attack against HTTP Request parsing.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a remote client to perform Denial of Service\n attack by sending a large X-Forwarded-For header when the\n follow_x_forwarded_for feature is configured.\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid version 6.6.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 5:\n <http://www.squid-cache.org/Versions/v5/SQUID-2023_10.patch>\n\n#### Squid 6:\n <http://www.squid-cache.org/Versions/v6/SQUID-2023_10.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n To check for follow_x_forwarded_for run the following command:\n\n  `squid -k parse 2>&1 |grep follow_x_forwarded_for`\n\n\n All Squid configured without follow_x_forwarded_for are not\n vulnerable.\n\n All Squid older than 5.0.5 have not been tested and should be\n assumed to be vulnerable when configured with\n follow_x_forwarded_for.\n\n All Squid-5.x up to and including 5.9 are vulnerable when\n configured with follow_x_forwarded_for.\n\n All Squid-6.x up to and including 6.5 are vulnerable when\n configured with follow_x_forwarded_for.\n\n__________________________________________________________________\n\n### Workaround:\n\n Remove all follow_x_forwarded_for lines from squid.conf\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <https://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by Joshua Rogers of Opera\n Software.\n\n Fixed by Thomas Leroy of the SUSE security team.\n\n__________________________________________________________________\n\n### Revision history:\n\n 2023-10-12 11:53:02 UTC Initial Report\n 2023-11-28 07:35:46 UTC Patches Released\n__________________________________________________________________\nEND",
+  "published": "2023-12-14T08:23:50Z",
+  "modified": "2023-12-14T08:23:50Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "2.6"
+            },
+            {
+              "last_affected": "2.7.STABLE9"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.1"
+            },
+            {
+              "last_affected": "5.9"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "6.0.1"
+            },
+            {
+              "fixed": "6.6"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-wgq4-4cfg-c4x3"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-50269"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-wgq4-4cfg-c4x3"
+    }
+  ]
+}

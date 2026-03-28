@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2021:6",
+  "aliases": [
+    "GHSA-47m4-g3mv-9q5r",
+    "CVE-2021-41611"
+  ],
+  "summary": "Improper Certificate Validation of TLS server certificates",
+  "details": "When validating an origin server or peer certificate, Squid may\n incorrectly classify certain certificates as trusted.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a remote server to obtain security trust\n when the trust is not valid. This indication of trust may be\n passed along to clients allowing access to unsafe or hijacked\n services.\n\n This problem is guaranteed to occur when multiple CA have\n signed the TLS server certificate. It may also occur in cases\n of broken server certificate chains.\n\nCVSS Score of 8.4\n<https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector=AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N/E:H/RL:O/RC:C/CR:H/IR:H/AR:X/MAV:X/MAC:X/MPR:X/MUI:R/MS:X/MC:H/MI:H/MA:X&version=3.1>\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid version 5.2.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 5:\n <http://www.squid-cache.org/Versions/v5/SQUID-2021_6.patch>\n\n If you are using a prepackaged version of Squid then please\n refer to the package vendor for availability information on\n updated packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n All Squid-4 and older are not vulnerable.\n\n All Squid-5.0.1 up to and including 5.0.5 are not vulnerable.\n\n All Squid-5.0.6 up to and including 5.1 are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\n The only workaround is complete denial to TLS and HTTPS servers\n publishing affected certificate chains. The set of affected\n servers varies over time and is left out of this document.\n\n  acl vulnerableDomains dstdomain .example.net\n  http_access deny vulnerableDomains\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is\n your primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <https://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by Jean-Paul Larocque of\n RodeoTV, LLC.\n\n Fixed by The Measurement Factory.\n\n__________________________________________________________________\n\n### Revision history:\n\n 2021-09-07 02:54:48 UTC Initial Report\n 2021-09-24 20:10:37 UTC Patches Released\n 2021-10-03 00:00:00 UTC Packages Released\n\n__________________________________________________________________\nEND",
+  "published": "2021-10-04T01:51:15Z",
+  "modified": "2023-10-23T09:03:51Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "5.0.6"
+            },
+            {
+              "fixed": "5.2"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-47m4-g3mv-9q5r"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-41611"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-47m4-g3mv-9q5r"
+    }
+  ]
+}

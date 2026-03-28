@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2002:1",
+  "aliases": [],
+  "summary": "Three issues in Squid-2.x versions",
+  "details": "Problem Description:\n\n Three security issues have recently been found in the Squid-2.X\n releases up to and including 2.4.STABLE3.\n\n a) A memory leak in the optional SNMP interface to Squid,\n allowing an malicious user who can send packets to the Squid SNMP\n port to possibly perform an denial of service attack on the Squid\n proxy service if the SNMP interface has been enabled (disabled by\n default).\n\n b) A buffer overflow in the implementation of ftp:// URLs where\n users who are allowed to proxy ftp:// URLs via Squid can perform\n an denial of service on the proxy service, and possibly even\n trigger remote execution of code (not yet confirmed).\n\n c) The optional HTCP interface cannot be properly disabled from\n squid.conf even if the documentation claims it can. The HTCP\n interface to Squid is not enabled by default, but can be enabled\n at compile time using the --enable-htcp configure option and some\n vendors distribute Squid binaries with HTCP enabled.\n\n\nUpdated Packages:\n\n The Squid-2.4.STABLE4 release contains fixes for all these\n problems. The Squid-2.4.STABLE4 release can be found from\n\n   ftp://ftp.squid-cache.org/pub/archive/2.4/\n   http://www.squid-cache.org/Versions/v2/2.4/\n\n or the mirrors (may take a while before all mirrors are updated).\n For a list of mirror sites see\n\n   http://www.squid-cache.org/Download/ftp-mirrors.html\n   http://www.squid-cache.org/Download/http-mirrors.html\n\n Individual patches to the mentioned issues can be found from our\n patch archive for version Squid-2.4.STABLE3\n\n   http://www.squid-cache.org/Versions/v2/2.4/bugs/\n\n The patches should also apply with only a minimal effort to\n earlier Squid versions if required.\n\n\nDetermining if your are vulnerable:\n\n You are vulnerable to the SNMP issue if you are running any 2.x\n version of squid up to squid-2.4.STABLE3 which has the SNMP agent\n code compiled in (--enable-snmp configure option) and enabled in\n squid.conf (snmp_port option). You can check to see whether the\n SNMP code is enabled by looking for the following message in\n cache.log when Squid is started:\n\n   'Accepting SNMP messages on port'\n\n Similarly for the HTCP issue, but looking for the message\n\n   'Accepting HTCP messages on port'\n\n The ftp:// issue cannot be verified as easily, but if you are\n running Squid-2.3 or Squid-2.4 up to and including\n Squid-2.4.STABLE3 then you are most likely vulnerable to the\n ftp:// issue unless you have taken action.\n\n\nWorkarounds:\n\n For the SNMP issue, make sure the SNMP port cannot be reached by\n malicious users. The safest method is to disable the SNMP support\n entirely in the configuration file squid.conf if SNMP has been\n enabled in your binary\n\n   snmp_port 0\n\n Or at least restrict it to only listen for SNMP on a trusted\n interfaces such as localhost by using the snmp_incoming_address\n directive\n\n   snmp_incoming_address 127.0.0.1\n\n\n The FTP issue can be worked around by denying access to\n non-anonymous FTP via Squid. Insert the following two lines at\n the top of your squid.conf:\n\n   acl non-anonymous-ftp url_regex -i ^ftp://[^/@]*@\n   http_access deny non-anonymous-ftp\n\n\n The HTCP issue cannot be worked around fully by configuration\n alone, but you can restrict which IP address HTCP is listening\n for messages on by using the udp_incoming_address directive. Make\n sure your binary isn't compiled with support for HTCP unless you\n have a reason to use HTCP.\n\n\n We also encourage you to take advantage of packet filtering\n features of your operating system (e.g, ipchains, iptables,\n ipfw, pf) and/or routers/firewalls to discard Squid SNMP (UDP\n port 3401) or HTCP (UDP port 4827) queries from hosts outside\n of your organization unless specifically authorized to use these\n protocols.\n\nRevision History:\n 2010-09-16 07:05 GMT Reference link updates",
+  "published": "2002-02-21T00:00:00Z",
+  "modified": "2002-02-21T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "2.0"
+            },
+            {
+              "last_affected": "2.4.STABLE3"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2002_1.txt"
+    }
+  ]
+}

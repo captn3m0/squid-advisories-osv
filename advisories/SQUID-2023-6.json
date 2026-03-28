@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2023:6",
+  "aliases": [
+    "GHSA-xxrg-5p7x-r66h",
+    "CVE-2019-18860"
+  ],
+  "summary": "Cross Site Scripting in cachemgr.cgi",
+  "details": "Due to an Improper Neutralization of Input During Web Page\n Generation bug Squid cachemgr.cgi tool is vulnerable to a\n Cross-Site Scripting attack.\n\n________________________________________________________________\n\n### Severity:\n\n This problem allows a remote attacker to perform a Cross-Site\n scripting attack against clients or administrators with access\n to the cachemgr.cgi reporting.\n\nThis attack is limited to cachemgr.cgi.\n\n________________________________________________________________\n\n### Updated Packages:\n\n#### The cachemgr.cgi tool has been removed (EOL) by Squid version 7\n\n Patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 6 and older:\n <https://github.com/squid-cache/squid/commit/d94dbed6c700faeded8c4175f2a8d0f71c15755b>\n\n#### Squid 4.8 and older also require:\n <https://github.com/squid-cache/squid/commit/5a90b4ce64c346ba7f317a278ba601091d9de076>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n All unpatched cachemgr.cgi are vulnerable.\n\n________________________________________________________________\n\n### Workaround:\n\n Fetch manager reports directly from Squid. For example;\n  http://localhost:3128/squid-internal-mgr/menu\n\n________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is\n your primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by Aaron Costello\n\n Additional vectors discovered by Stefan Cornelius of RedHat.\n\n Initial fix by Aaron Costello\n\n________________________________________________________________\n\n### Revision history:\n\n 2019-10-18 20:15:14 UTC Initial Report\n 2019-11-03 16:22:22 UTC Initial Patch Released\n 2020-03-31 11:07:35 UTC Additional Report\n 2025-11-04 21:23:34 UTC Additional Patch Released\n________________________________________________________________\nEND",
+  "published": "2025-11-04T22:18:42Z",
+  "modified": "2025-11-05T02:41:34Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "0"
+            },
+            {
+              "fixed": "7.0.1"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:H/I:L/A:N"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-xxrg-5p7x-r66h"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18860"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-xxrg-5p7x-r66h"
+    }
+  ]
+}

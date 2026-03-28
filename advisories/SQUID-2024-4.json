@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2024:4",
+  "aliases": [
+    "GHSA-f975-v7qw-q7hj",
+    "CVE-2024-45802"
+  ],
+  "summary": "Multiple issues in ESI",
+  "details": "Due to Input Validation, Premature Release of Resource During\n Expected Lifetime, and Missing Release of Resource after\n Effective Lifetime bugs, Squid is vulnerable to Denial of Service\n attacks by a trusted server against all clients using the proxy.\n\nVulnerabilities are present in:\n* interpreting `<esi:when>`. Original reports:\n  * <https://megamansec.github.io/Squid-Security-Audit/esi-when-assert-0.html>\n  * <https://megamansec.github.io/Squid-Security-Audit/esi-when-assert-1.html>\n  * <https://megamansec.github.io/Squid-Security-Audit/esi-nullpointer.html>\n  * <https://megamansec.github.io/Squid-Security-Audit/esi-uaf.html>\n* interpreting `<esi:assign>`. Original reports:\n  * <https://megamansec.github.io/Squid-Security-Audit/esi-assignassert.html>\n  * <https://megamansec.github.io/Squid-Security-Audit/esi-assignassert-2.html>\n  * <https://megamansec.github.io/Squid-Security-Audit/esi-underflow.html>\n* interpreting `<esi:include>`. Original report:\n  * <https://megamansec.github.io/Squid-Security-Audit/esi-nullpointer.html>\n* interpreting `<esi:try>` and `<esi:choose>`. Original report:\n  * <https://megamansec.github.io/Squid-Security-Audit/esi-uaf-crash.html>\n* processing errors. Original report:\n  * <https://megamansec.github.io/Squid-Security-Audit/esi-memleak.html>\n* processing overlong headers. Original report:\n  * <https://megamansec.github.io/Squid-Security-Audit/esi-assert-header.html>\n\n__________________________________________________________________\n\nSeverity:\n\n This problem allows a trusted server to perform a Denial of\n Service when processing ESI response content. This effects all\n domains being serviced by the proxy and all clients using it\n during the affected period.\n\n These issues are limited to Squid acting as reverse proxy where\n ESI feature has been enabled at build time.\n\n The ESI feature is enabled in the default configuration in all\n Squid versions from 3.0 to 6.9, and disabled in the default\n configuration since version 6.10.\n\n__________________________________________________________________\n\nUpdated Packages:\n\n This bug is fixed in the default build configuration of Squid\n version 6.10\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\nDetermining if your version is vulnerable:\n\n Run `squid -v` to determine the version number and build\n configuration parameters.\n\n Version 3.x, 4.x, 5.x, and 6.0.1 to 6.9 are vulnerable unless the\n output contains the text '--disable-esi'.\n\n Versions 6.10 and later are vulnerable if the output contains the\n text '--enable-esi'.\n\n__________________________________________________________________\n\nWorkaround:\n\n Build affected Squid with `--disable-esi`.\n\n__________________________________________________________________\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <https://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\nCredits:\n\n This vulnerability was discovered by Joshua Rogers of Opera\n Software.\n\n__________________________________________________________________\n\nRevision history:\n\n 2021-02-28 05:25:48 UTC Initial Report\n 2024-03-13 08:01:12 UTC ESI disabled by default in v6\n 2024-06-08 13:28:58 UTC Squid 6.10 released with ESI disabled\n\n__________________________________________________________________\nEND",
+  "published": "2024-10-28T05:13:08Z",
+  "modified": "2025-01-24T05:22:07Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.0"
+            },
+            {
+              "last_affected": "6"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-f975-v7qw-q7hj"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2024-45802"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-f975-v7qw-q7hj"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2014:4",
+  "aliases": [
+    "CVE-2014-7141",
+    "CVE-2014-7142"
+  ],
+  "summary": "Multiple issues in pinger ICMP processing",
+  "details": "Problem Description:\n\n Due to incorrect bounds checking Squid pinger binary is\n vulnerable to denial of service or information leak attack when\n processing larger than normal ICMP or ICMPv6 packets.\n\n Due to incorrect input validation Squid pinger binary is\n vulnerable to denial of service or information leak attacks when\n processing ICMP or ICMPv6 packets.\n\n\nSeverity:\n\n Several bugs allow any remote server to perform a denial of\n service attack on the Squid service by crashing the pinger.\n\n Some of these bugs allow attackers to leak arbitrary amounts of\n information from the heap into Squid log files. This is of higher\n importance than usual because the pinger process operates with\n root priviliges.\n\n\nUpdated Packages:\n\n This bug is fixed by Squid version 3.4.8\n\n In addition, patches addressing this problem for stable releases\n can be found in our patch archives:\n\nSquid 3.1:\nhttp://www.squid-cache.org/Versions/v3/3.1/changesets/SQUID-2014_4.patch\n\nSquid 3.2:\nhttp://www.squid-cache.org/Versions/v3/3.2/changesets/squid-3.2-11830.patch\n\nSquid 3.3:\nhttp://www.squid-cache.org/Versions/v3/3.3/changesets/squid-3.3-12683.patch\n\nSquid 3.4:\nhttp://www.squid-cache.org/Versions/v3/3.4/changesets/squid-3.4-13173.patch\n\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n All Squid built with --disable-icmp are not vulnerable to these\n problems.\n\n Check the server running processes list to determine if the Squid\n service is running a \"pinger\" child process.\n\n All unpatched Squid-2.x and Squid-3.x versions up to and\n including 3.4.7 running the pinger process are vulnerable to\n these problems.\n\n\nWorkaround:\n\n Configuring the firewall controlling access to Squid service such\n that only ICMP ECHO packets are allowed delivery to the Squid\n pinger process will limit the denial of service vulnerability.\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the squid-users@squid-cache.org mailing list is your primary\n support point. For subscription details see\n http://www.squid-cache.org/Support/mailing-lists.html.\n\n For reporting of non-security bugs in the latest release\n the squid bugzilla database should be used\n http://bugs.squid-cache.org/.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@squid-cache.org mailing list. It's a closed list\n (though anyone can post) and security related bug reports are\n treated in confidence until the impact has been established.\n\n\nCredits:\n\n Several of the vulnerabilities were discovered and fixed by\n Sebastian Krahmer of the OpenSUSE Project.\n\n Some of the vulnerabilities were discovered and fixed by Amos\n Jeffries of Treehouse Networks Ltd.\n\n\nRevision history:\n\n 2014-09-09 08:39 GMT Initial Report\n 2014-09-15 08:15 GMT Patches and Packages Released\n 2014-09-22 06:08 GMT CVE assignment\n 2015-06-12 22:41 GMT Updated patch for 3.1",
+  "published": "2014-09-15T00:00:00Z",
+  "modified": "2014-09-15T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.0"
+            },
+            {
+              "fixed": "3.4.8"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2014_4.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7141"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-7142"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2010:3",
+  "aliases": [
+    "CVE-2010-3072"
+  ],
+  "summary": "Denial of Service in request processing",
+  "details": "Problem Description:\n\n Due to an internal error in string handling Squid is vulnerable\n to a denial of service attack when processing specially crafted\n requests.\n\n\nSeverity:\n\n This problem allows any trusted client to perform a denial of\n service attack on the Squid service.\n\n There are applications already in general public use which can\n trigger this problem for 3.1 and 3.2 on occasion without intended\n malice.\n\n\nUpdated Packages:\n\n This bug is fixed by Squid versions 3.1.8 and 3.2.0.2\n\n In addition, patches addressing this problem for stable releases\n can be found in our patch archives:\n\nSquid 3.0:\nhttp://www.squid-cache.org/Versions/v3/3.0/changesets/squid-3.0-9189.patch\n\nSquid 3.1:\nhttp://www.squid-cache.org/Versions/v3/3.1/changesets/squid-3.1-10090.patch\n\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\nSquid-3.0:\n\n All Squid-3.0 versions up to and including 3.0.STABLE25 have\n some risk of being vulnerable to variations of the problem.\n The particular 0-day tests currently known do not trigger it.\n\nSquid-3.1:\n\n All versions up to and including 3.1.7 are at some risk of being\n vulnerable to the problem and its variations.\n\n squid.conf containing with \"ignore_expect_100 on\" are vulnerable\n to the known active 0-day.\n\n Binaries built with --disable-http-violations are not vulnerable\n to the known active 0-day.\n\nSquid-3.2:\n\n The 3.2.0.1 beta version is vulnerable under the same conditions\n as for Squid-3.1.\n\n\nWorkarounds:\n\n These workarounds apply only to the known active 0-day triggers.\n\n 1) Checking that ignore_expect_100 squid.conf option is set to\n    \"off\" (the default), or removed completely from squid.conf.\n\nor,\n\n 2) Building Squid with --disable-http-violations.\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the squid-users@squid-cache.org mailing list is your primary\n support point. For subscription details see\n http://www.squid-cache.org/Support/mailing-lists.html.\n\n For reporting of non-security bugs in the latest release\n the squid bugzilla database should be used\n http://bugs.squid-cache.org/.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@squid-cache.org mailing list. It's a closed list\n (though anyone can post) and security related bug reports are\n treated in confidence until the impact has been established.\n\n\nCredits:\n\n The vulnerability was discovered by Phil Oester.\n\n\nRevision history:\n\n 2010-08-30 14:19 GMT Initial Report\n 2010-09-01 08:04 GMT Patches Released\n 2010-09-03 09:00 GMT Initial version\n 2010-09-16 07:05 GMT Reference link updates\n 2011-02-13 09:30 GMT CVE reference update",
+  "published": "2010-09-03T00:00:00Z",
+  "modified": "2010-09-03T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.0"
+            },
+            {
+              "last_affected": "3.0.STABLE25"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.1"
+            },
+            {
+              "fixed": "3.1.8"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.2"
+            },
+            {
+              "fixed": "3.2.0.2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2010_3.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-3072"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2005:1",
+  "aliases": [],
+  "summary": "Buffer overflow in Gopher reply parser",
+  "details": "Problem Description:\n\n A bug exists in the code that parses responses from Gopher servers.\n The bug results in a buffer overflow if a Gopher server returns a\n line longer than 4096 bytes.  The overflow results in memory\n corruption and usually crashes Squid.\n\n\nSeverity:\n\n A malicious user may set up a fake Gopher server and forward\n requests to it through Squid.  Specially crafted responses from\n that server may cause Squid to restart.  We do not beleive that\n this overflow allows arbitrary code execution popular platforms.\n\n\nUpdated Packages:\n\n An individual patch for this issues can be found in our patch\n archive for version Squid-2.5.STABLE7:\n\n   http://www.squid-cache.org/Versions/v2/2.5/bugs/squid-2.5.STABLE7-gopher_html_parsing.patch\n\n If necessary, this short patch should also apply to previous\n versions of Squid.\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n Squid versions up to, and including, 2.5.STABLE7 are vulnerable.\n\n\nWorkarounds:\n\n Since real Gopher servers are extremely rare these days, there is\n almost no reason for Squid to contact a Gopher server.  You can\n add a simple access control rule to deny all Gopher requests to\n Squid:\n\n    acl Gopher proto Gopher\n    http_access deny Gopher\n\n Restart or reconfigure Squid after editing squid.conf.  Test your\n access controls with a simple request:\n\n    % squidclient gopher://127.0.0.1/\n\n You should see an \"Access Denied\" message.\n\n\nContact details for the Squid project:\n\n For installation / upgrade support: Your first point of contact\n should be your binary package vendor.\n\n If your install is built from the original Squid sources, then\n the squid-users@squid-cache.org mailing list is your primary\n support point. (see <http://www.squid-cache.org/Support/mailing-lists.html>\n for subscription details).\n\n For bug reporting, particularly security related bugs the\n squid-bugs@squid-cache.org mailing list is the appropriate forum.\n It's a closed list (though anyone can post) and security related\n bug reports are treated in confidence until the impact has been\n established. For non security related bugs, the squid bugzilla\n database should be used <http://bugs.squid-cache.org/>.\n\n\nCredits:\n\n The vulnerability was reported by infamous41md.\n\n\nRevision history:\n\n 2005-01-15 03:55 GMT Initial release of this document\n 2010-09-16 07:05 GMT Reference link updates",
+  "published": "2005-01-15T00:00:00Z",
+  "modified": "2005-01-15T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "0"
+            },
+            {
+              "last_affected": "2.5.STABLE7"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2005_1.txt"
+    }
+  ]
+}

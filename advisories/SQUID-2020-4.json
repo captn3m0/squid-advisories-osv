@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2020:4",
+  "aliases": [
+    "CVE-2020-11945"
+  ],
+  "summary": "Multiple issues in HTTP Digest authentication",
+  "details": "Problem Description:\n\n Due to an integer overflow bug Squid is vulnerable to credential\n replay and remote code execution attacks against HTTP Digest\n Authentication tokens.\n\n\nSeverity:\n\n When memory pooling is used this problem allows a remote client\n to replay a sniffed Digest Authentication nonce to gain access\n to resources that are otherwise forbidden.\n\n When memory pooling is disabled this problem allows a remote\n client to perform remote code execution through the free'd nonce\n credentials.\n\n\nUpdated Packages:\n\n This bug is fixed by Squid versions 4.11 and 5.0.2.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\nSquid 4:\n <http://www.squid-cache.org/Versions/v4/SQUID-2020_4.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n All Squid-2.x up to and including 2.4.STABLE7 are not vulnerable.\n\n All Squid-2.5 up to and including 2.7.STABLE9 are vulnerable.\n\n All Squid-2.x up to and including 2.7.STABLE9 configured with\n \"auth_param digest\" are vulnerable.\n\n All Squid-2.x up to and including 2.7.STABLE9 configured without\n \"auth_param digest\" are not vulnerable.\n\n All Squid-3.x up to and including 3.5.28 built with\n --disable-auth are not vulnerable.\n\n All Squid-3.2 up to and including 3.5.28 built with\n --disable-auth-digest are not vulnerable.\n\n All Squid-3.x up to and including 3.5.28 configured with\n \"auth_param digest\" are vulnerable.\n\n All Squid-3.x up to and including 3.5.28 configured without\n \"auth_param digest\" are not vulnerable.\n\n All Squid-4.x up to and including 4.10 built with\n --disable-auth are not vulnerable.\n\n All Squid-4.x up to and including 4.10 built with\n --disable-auth-digest are not vulnerable.\n\n All Squid-4.x up to and including 4.10 configured with\n \"auth_param digest\" are vulnerable.\n\n All Squid-4.x up to and including 4.10 configured without\n \"auth_param digest\" are not vulnerable.\n\n Squid-5.0.1 built with --disable-auth-digest is not vulnerable.\n\n Squid-5.0.1 configured with \"auth_param digest\" are vulnerable.\n\n Squid-5.0.1 configured without \"auth_param digest\" are not\n vulnerable.\n\n\nWorkaround:\n\nEither,\n\n Remove all \"auth_param digest\" lines from squid.conf\n\nOr,\n\n Build Squid with --disable-auth-digest\n\nOr,\n\n Build Squid with --disable-auth\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If your install and build Squid from the original Squid sources\n then the squid-users@lists.squid-cache.org mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@lists.squid-cache.org mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n\nCredits:\n\n This vulnerability was discovered by Cl\u00e9ment Berthaux and\n Florian Guilbert of Synacktiv.\n\n Fixed by Maxime Desbrus of Synacktiv.\n\n\nRevision history:\n\n 2019-11-20 13:39:07 UTC Initial Report\n 2020-04-02 11:16:45 UTC Patches Released\n 2020-04-20 20:08:14 UTC CVE Assignment\n 2020-04-23 08:00:00 UTC Advisory Released",
+  "published": "2020-04-23T00:00:00Z",
+  "modified": "2020-04-23T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "2.0"
+            },
+            {
+              "last_affected": "2.7.STABLE9"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.0"
+            },
+            {
+              "last_affected": "3.5.28"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "4.0"
+            },
+            {
+              "fixed": "4.11"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "5.0"
+            },
+            {
+              "fixed": "5.0.2"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2020_4.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11945"
+    }
+  ]
+}

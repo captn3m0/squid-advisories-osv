@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2023:4",
+  "aliases": [
+    "GHSA-73m6-jm96-c6r3",
+    "CVE-2023-46724"
+  ],
+  "summary": "Denial of Service in SSL Certificate validation",
+  "details": "Due to an Improper Validation of Specified Index\n bug Squid is vulnerable to a Denial of Service\n attack against SSL Certificate validation.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a remote server to perform Denial of\n Service against Squid Proxy by initiating a TLS Handshake with\n a specially crafted SSL Certificate in a server certificate\n chain.\n\n This attack is limited to HTTPS and SSL-Bump.\n\nCVSS Score of 8.6\n<https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator?vector=AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H&version=3.1>\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid version 6.4.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 5:\n <http://www.squid-cache.org/Versions/v5/SQUID-2023_4.patch>\n\n#### Squid 6:\n <http://www.squid-cache.org/Versions/v6/SQUID-2023_4.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n All Squid older than 3.3.0.1 are not vulnerable.\n\n All Squid-3.3 up to and including 3.4.14 compiled without\n   --enable-ssl are not vulnerable.\n\n All Squid-3.3 up to and including 3.4.14 compiled using\n   --enable-ssl are vulnerable.\n\n All Squid-3.5 up to and including 3.5.28 compiled without\n   --with-openssl are not vulnerable.\n\n All Squid-3.5 up to and including 3.5.28 compiled using\n   --with-openssl  are vulnerable.\n\n All Squid-4.x up to and including 4.16 compiled without\n   --with-openssl are not vulnerable.\n\n All Squid-4.x up to and including 4.16 compiled using\n   --with-openssl  are vulnerable.\n\n Squid-5.x up to and including 5.9 compiled without\n   --with-openssl are not vulnerable.\n\n All Squid-5.x up to and including 5.9 compiled using\n   --with-openssl  are vulnerable.\n\n All Squid-6.x up to and including 6.3 compiled without\n   --with-openssl are not vulnerable.\n\n All Squid-6.x up to and including 6.3 compiled using\n   --with-openssl  are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\nEither,\n\n Disable use of SSL-Bump features:\n  * Remove all ssl-bump options from http_port and https_port\n  * Remove all ssl_bump directives from squid.conf\n\nOr,\n\n  Rebuild Squid using --without-openssl.\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <https://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered by Joshua Rogers of Opera\nSoftware.\n\n Fixed by Andreas Weigel \n\n__________________________________________________________________\n\n### Revision history:\n\n 2023-10-12 11:53:02 UTC Initial Report\n__________________________________________________________________\nEND",
+  "published": "2023-11-01T17:09:33Z",
+  "modified": "2023-11-01T19:04:34Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.3.0.1"
+            },
+            {
+              "last_affected": "5.9"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "6.0"
+            },
+            {
+              "fixed": "6.4"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:N/A:H"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-73m6-jm96-c6r3"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-46724"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-73m6-jm96-c6r3"
+    }
+  ]
+}

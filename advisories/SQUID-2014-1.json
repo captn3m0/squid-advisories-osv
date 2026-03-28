@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2014:1",
+  "aliases": [
+    "CVE-2014-0128"
+  ],
+  "summary": "Denial of Service in SSL-Bump",
+  "details": "Problem Description:\n\n Due to incorrect state management Squid is vulnerable to a denial\n of service attack when processing certain HTTPS requests.\n\n\nSeverity:\n\n This problem allows any client who can generate HTTPS requests\n to perform a denial of service attack on the Squid service.\n\n There are popular client software implementations which generate\n HTTPS requests and triggering this vulnerability during their\n normal activities.\n\n\nUpdated Packages:\n\n This bug is fixed by Squid versions 3.3.12 and 3.4.4.\n\n In addition, patches addressing this problem can be found in\n our patch archives.\n\nSquid 3.3:\n\n<http://www.squid-cache.org/Versions/v3/3.3/changesets/squid-3.3-12677.patch>\n\nSquid 3.4:\n\n<http://www.squid-cache.org/Versions/v3/3.4/changesets/squid-3.4-13104.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n All Squid versions without SSL-Bump feature configured are not\n vulnerable.\n\n All Squid-3.0 and older versions, including Squid-2 are not\n vulnerable.\n\n All unpatched Squid-3.1 versions are vulnerable.\n\n All unpatched Squid-3.2 versions are vulnerable.\n\n All unpatched Squid-3.3 versions up to and including 3.3.11 are\n vulnerable.\n\n All unpatched Squid-3.4 versions up to and including 3.4.3 are\n vulnerable.\n\n\nWorkarounds:\n\nEither\n\n Disable SSL-bump for clients affected by adding \"ssl_bump none\"\n rule(s) at the top of the ssl_bump configuration directives.\n\nOr\n\n Disable SSL-bump featrue completely by removing ssl-bump option\n from all http_port and/or https_port configuration directives.\n\nOr\n\n Use TCP_RESET instead of all Squid-generated error pages.\n Note that this is only a partial workaround as some error pages\n cannot be overridden.\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If your install and build Squid from the original Squid sources\n then the squid-users@squid-cache.org mailing list is your primary\n support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@squid-cache.org mailing list. It's a closed list\n (though anyone can post) and security related bug reports are\n treated in confidence until the impact has been established.\n\n\nCredits:\n\n The vulnerability was reported by Mathias Fischer and Fabian\n Hugelshofer from Open Systems AG.\n\n Fixes by Alex Rousskov from The Measurement Factory.\n\n\nRevision history:\n\n 2014-02-21 16:04 GMT Initial Report\n 2014-02-22 23:51 GMT Patch Provided\n 2014-03-09 00:14 GMT Packages Released",
+  "published": "2014-03-09T00:00:00Z",
+  "modified": "2014-03-09T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.1"
+            },
+            {
+              "fixed": "3.3.12"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.4"
+            },
+            {
+              "fixed": "3.4.4"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2014_1.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2014-0128"
+    }
+  ]
+}

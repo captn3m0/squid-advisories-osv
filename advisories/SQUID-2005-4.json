@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2005:4",
+  "aliases": [],
+  "summary": "HTTP Request Smuggling cache poisoning",
+  "details": "Problem Description:\n\n Squid is susceptible to a class of attacks known as \"HTTP Request\n Smuggling.\"  These attacks involve sending malformed HTTP requests\n that cause Squid and an upstream HTTP agent (origin server or\n another proxy) to disagree on the boundary between HTTP requests\n on a persistent connection.\n\n For example, if a PUT or POST request contains two Content-Length\n headers, one agent may use the first value, while the other agent\n uses the second value.  If the PUT/POST body contains data that\n looks like another HTTP request, the two agents become out-of-sync.\n This may lead to cache poisoning.\n\n Other attack vectors include whitespace in HTTP header names and\n extra CR characters at the end of header lines.\n\n\nSeverity:\n\n This problem is serious because it allows an attacker to poison\n Squid's cache.\n\n However, the major aspects of this problem is easily fixed by\n disabling (at least temporarily) HTTP persistent connections.\n\n Some of these issues is usually minor in nature and Squid will\n only warn when encountering them, but if you are in a complex\n hierarchy of proxy servers the situation may be worse allowing\n bypass of certain access controls or the like. If you want Squid\n to be strict about this class of protocol violations and reject\n any such requests or responses then set the new\n relaxed_header_parser directive to off.\n\n\nCollateral Damage:\n\n After closing these vulnerabilities, Squid rejects certain\n malformed HTTP requests and responses.  Your users may see\n failures (error messages) for sites that used to work because\n the protocol error was unnoticed by earlier versions of Squid,\n and warning messages will be seen in cache.log for even more\n sites where Squid can recover unambiguously.\n\n When encountering such sites it is important you work with the\n site owner to make their servers comply with the HTTP\n specifications. Most of these problems with servers not complying\n to the HTTP specifications can not be worked around in a safe\n manner.\n\n\nUpdated Packages:\n\n This bug is fixed by Squid version 2.5.STABLE8.\n\n In addition, an individual patch for this issues can be found in\n our patch archive for version Squid-2.5.STABLE7:\n\n   http://www.squid-cache.org/Versions/v2/2.5/bugs/#squid-2.5.STABLE7-header_parsing\n\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n Squid versions up to, and including, 2.5.STABLE7 are vulnerable.\n\n\nWorkarounds:\n\n The simplest workaround is to disable HTTP persistent connections.\n Add these lines to your squid.conf:\n\n     client_persistent_connections off\n     server_persistent_connections off\n\n This closes most issues relating to Squid and the cache, but not\n all forms of the attack in general.\n\nContact details for the Squid project:\n\n For installation / upgrade support: Your first point of contact\n should be your binary package vendor.\n\n If your install is built from the original Squid sources, then\n the squid-users@squid-cache.org mailing list is your primary\n support point. (see <http://www.squid-cache.org/Support/mailing-lists.html>\n for subscription details).\n\n For bug reporting, particularly security related bugs the\n squid-bugs@squid-cache.org mailing list is the appropriate forum.\n It's a closed list (though anyone can post) and security related\n bug reports are treated in confidence until the impact has been\n established. For non security related bugs, the squid bugzilla\n database should be used <http://bugs.squid-cache.org/>.\n\n\nCredits:\n\n The vulnerability was reported by Steve Orrin at Watchfire\n\n Their paper on the subject can be found from\n http://www.watchfire.com/resources/HTTP-Request-Smuggling.pdf\n\n\nRevision history:\n\n 2005-04-23 07:15 GMT Initial version\n 2005-08-03 15:46 GMT Added reference to the published paper\n                      from Watchfire\n 2010-09-16 07:05 GMT Reference link updates",
+  "published": "2005-04-23T00:00:00Z",
+  "modified": "2005-04-23T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "0"
+            },
+            {
+              "last_affected": "2.5.STABLE7"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2005_4.txt"
+    }
+  ]
+}

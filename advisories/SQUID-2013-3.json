@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2013:3",
+  "aliases": [
+    "CVE-2013-4123"
+  ],
+  "summary": "Denial of Service in request processing",
+  "details": "Problem Description:\n\n Due to incorrect data validation Squid is vulnerable to a denial\n of service attack when processing specially crafted HTTP requests\n\n\nSeverity:\n\n This problem allows any client who can generate HTTP requests to\n perform a denial of service attack on the Squid service.\n\n\nUpdated Packages:\n\n This bug is fixed by Squid versions 3.2.13 and 3.3.8.\n\n In addition, patches addressing this problem can be found in\n our patch archives.\n\nSquid 3.2:\n http://www.squid-cache.org/Versions/v3/3.2/changesets/squid-3.2-11826.patch\n\nSquid 3.3:\n http://www.squid-cache.org/Versions/v3/3.3/changesets/squid-3.3-12591.patch\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n All Squid-3.1 and older versions, including Squid-2 are not\n vulnerable.\n\n All unpatched Squid-3.2 versions up to and including 3.2.12 are\n vulnerable.\n\n All unpatched Squid-3.3 versions up to and including 3.3.7 are\n vulnerable.\n\n\nWorkarounds:\n\n There are no workarounds for this issue.\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If your install and build Squid from the original Squid sources\n then the squid-users@squid-cache.org mailing list is your primary\n support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@squid-cache.org mailing list. It's a closed list\n (though anyone can post) and security related bug reports are\n treated in confidence until the impact has been established.\n\n\nCredits:\n\n The vulnerability was reported by Alex Rousskov, The Measurement\n Factory and Saran Neti, TELUS Security Labs.\n\n\nRevision history:\n\n 2013-06-05 23:58 GMT Initial Report\n 2013-07-12 18:46 GMT Second Report\n 2013-07-14 16:31 GMT Advisory and Patches released\n 2013-07-16 03:07 GMT Updated timeline and credits",
+  "published": "2013-07-13T00:00:00Z",
+  "modified": "2013-07-13T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.2"
+            },
+            {
+              "fixed": "3.2.13"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.3"
+            },
+            {
+              "fixed": "3.3.8"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2013_3.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2013-4123"
+    }
+  ]
+}

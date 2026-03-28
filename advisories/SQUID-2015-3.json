@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2015:3",
+  "aliases": [],
+  "summary": "Multiple Remote Denial of Service in SSL/TLS processing",
+  "details": "Problem Description:\n\n Due to integer overflow issues Squid is vulnerable to a denial\n of service attack when processing SSL or TLS messages.\n\n Due to lack of input validation Squid is vulnerable to a denial\n of service attack when processing SSL or TLS messages.\n\n\nSeverity:\n\n These problems allow any trusted client or external server to\n perform a denial of service attack on the Squid service and all\n other services on the same machine.\n\n There exists popular software which triggers these bugs\n unintentionally.\n\n However, the bugs are exploitable only if you have configured a\n Squid-3.5 listening port with ssl-bump.\n\n\nUpdated Packages:\n\n These bugs are fixed by Squid version 3.5.9.\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n All Squid-3.4 and older versions are not vulnerable.\n\n All Squid-3.5 built without OpenSSL support are not vulnerable.\n\n All unpatched Squid-3.5 with http_port or https_port configured\n with the ssl-bump option in squid.conf are vulnerable.\n\n The following command can be used to easily determine if a\n vulnerable configuration is being used:\n squid -k parse 2>&1 | grep ssl-bump\n\n\nWorkaround:\n\n Remove ssl-bump configuration options from squid.conf\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If your install and build Squid from the original Squid sources\n then the squid-users@squid-cache.org mailing list is your primary\n support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@squid-cache.org mailing list. It's a closed list\n (though anyone can post) and security related bug reports are\n treated in confidence until the impact has been established.\n\n\nCredits:\n\n The vulnerability was reported by Aleksandr Demchenko.\n\n Fixes by Alex Rousskov and Christos Tsantilas of The Measurement\n Factory.\n\n\nRevision history:\n\n 2015-08-27 08:39:03 GMT Initial Report\n 2015-09-17 13:04:55 GMT Packages Released",
+  "published": "2015-09-17T00:00:00Z",
+  "modified": "2015-09-17T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.5.0.1"
+            },
+            {
+              "fixed": "3.5.9"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2015_3.txt"
+    }
+  ]
+}

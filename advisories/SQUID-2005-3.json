@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2005:3",
+  "aliases": [],
+  "summary": "Buffer overflow in WCCP recvfrom() call",
+  "details": "Problem Description:\n\n The WCCP recvfrom() call accepts more data than will fit in\n the allocated buffer.  An attacker may send a larger-than-normal\n WCCP message to Squid and overflow this buffer.\n\nSeverity:\n\n The bug is important because it allows remote attackers to crash\n Squid, causing a disription in service.  However, the bug is\n exploitable only if you have configured Squid to send WCCP messages\n to, and expect WCCP replies from, a router.\n\n Sites that do not use WCCP are not vulnerable.\n\n\nUpdated Packages:\n\n An individual patch for this issues can be found in our\n patch archive for version Squid-2.5.STABLE7:\n\n   http://www.squid-cache.org/Versions/v2/2.5/bugs/squid-2.5.STABLE7-wccp_buffer_overflow.patch\n\n If necessary, this short patch should also apply to previous\n versions of Squid.\n\n If you are using a prepackaged version of Squid then please\n refer to the package vendor for availability information on\n updated packages.\n\n\nDetermining if your version is vulnerable:\n\n Your installation is vulnerable if you have configured Squid to\n send WCCP messages to a router, and thus expect replies from a\n router.  Look for the 'wccp_router' dirctive in your squid.conf\n file.  Also, look for this line in cache.log:\n\n  Accepting WCCP messages on port 2048, FD 15\n\n\nWorkarounds:\n\n If WCCP is not essential to your operation, disable it\n by commenting out the 'wccp_router' directive in\n squid.conf.\n\n You may also compile Squid without any WCCP code at all\n by giving the --disable-wccp option to the ./configure\n script.\n\n\nContact details for the Squid project:\n\n For installation / upgrade support: Your first point of contact\n should be your binary package vendor.\n\n If your install is built from the original Squid sources, then\n the squid-users@squid-cache.org mailing list is your primary\n support point. (see <http://www.squid-cache.org/Support/mailing-lists.html>\n for subscription details).\n\n For bug reporting, particularly security related bugs the\n squid-bugs@squid-cache.org mailing list is the appropriate forum.\n It's a closed list (though anyone can post) and security related\n bug reports are treated in confidence until the impact has been\n established. For non security related bugs, the squid bugzilla\n database should be used <http://bugs.squid-cache.org/>.\n\n\nCredits:\n\n The vulnerability was reported by FSC Vulnerability Research Team.\n\n\nRevision history:\n\n 2005-01-28 23:20 GMT Initial release of this document\n 2010-09-16 07:05 GMT Reference link updates",
+  "published": "2005-01-28T00:00:00Z",
+  "modified": "2005-01-28T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "0"
+            },
+            {
+              "last_affected": "2.5.STABLE7"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2005_3.txt"
+    }
+  ]
+}

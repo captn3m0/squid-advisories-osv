@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2010:1",
+  "aliases": [
+    "CVE-2010-0308"
+  ],
+  "summary": "Denial of Service in DNS handling",
+  "details": "Problem Description:\n\n Due to incorrect data validation Squid is vulnerable to a denial\n of service attack when processing specially crafted DNS packets.\n\n\nSeverity:\n\n This problem allows any trusted client or external server who can\n determine the squid receiving port to perform a short-term denial\n of service attack on the Squid service.\n\n\nUpdated Packages:\n\n This bug is fixed by Squid versions 2.6.STABLE24, 2.7.STABLE8,\n 3.0.STABLE23 and 3.1.0.16.\n\n In addition, patches addressing these problems can be found In\n our patch archives.\n\nSquid 2.x:\n http://www.squid-cache.org/Versions/v2/HEAD/changesets/12597.patch\n\nSquid 3.0:\n http://www.squid-cache.org/Versions/v3/3.0/changesets/squid-3.0-9163.patch\n\nSquid 3.1:\n http://www.squid-cache.org/Versions/v3/3.1/changesets/squid-3.1-9853.patch\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n Squid still using the obsolete dnsserver are not vulnerable.\n\n The ignore_unknown_nameservers option affects the severity of\n this vulnerability. When set to \"on\" (the default) risk is low.\n When set to \"off\" the vulnerability risk is increased.\n\n All unpatched Squid-3.0 versions up to and including 3.0.STABLE22\n are vulnerable.\n\n All unpatched Squid-3.1 versions up to and including 3.1.0.15 are\n vulnerable.\n\n All unpatched Squid-2.7 versions up to and including 2.7.STABLE8\n are vulnerable.\n\n All unpatched Squid-2.x versions up to and including 2.6.STABLE24\n are vulnerable.\n\n\nWorkarounds:\n\n Using all of the following steps are required to protect a\n vulnerable Squid from this and other forms of DNS attack.\n\n * Ensuring the ignore_unknown_nameservers is turned on.\n\n * Ensuring that DNS packets cannot be sent to Squid from\n   untrusted nameservers or other machines.\n\n The most secure implementation of these requirements is to use\n a nameserver running on the localhost IP dedicated for secure use\n by Squid and any other services on the Squid machine.\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If your install and build Squid from the original Squid sources\n then the squid-users@squid-cache.org mailing list is your primary\n support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@squid-cache.org mailing list. It's a closed list\n (though anyone can post) and security related bug reports are\n treated in confidence until the impact has been established.\n\n\nCredits:\n\n Zero-Day attributed to work by Fabian Yamaguchi.\n\n The vulnerability was reported by Tomas Hoger of RedHat.\n\n\nRevision history:\n\n 2010-01-14 18:05 GMT Initial Report\n 2010-01-16 03:51 GMT Patches released.\n 2010-02-01 04:49 GMT Squid-3 bundled fixes and advisory released.\n 2010-02-02 07:42 GMT Updated 3.0 patch and bundle\n 2010-02-06 02:35 GMT CVE-2010-0308 reference added.\n 2010-09-16 07:05 GMT Reference link updates\n 2011-04-12 02:05 GMT Updated info on 2.6 and 2.7 being patched",
+  "published": "2010-02-01T00:00:00Z",
+  "modified": "2010-02-01T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "2.0"
+            },
+            {
+              "fixed": "2.6.STABLE24"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "2.7"
+            },
+            {
+              "fixed": "2.7.STABLE8"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.0"
+            },
+            {
+              "fixed": "3.0.STABLE23"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.1"
+            },
+            {
+              "fixed": "3.1.0.16"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2010_1.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2010-0308"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2016:1",
+  "aliases": [
+    "CVE-2016-2390"
+  ],
+  "summary": "Remote Denial of Service in SSL/TLS processing",
+  "details": "Problem Description:\n\n Due to incorrectly handling server errors Squid is vulnerable to\n a denial of service attack when connecting to TLS or SSL servers.\n\n\nSeverity:\n\n This problem allows any trusted client to perform a denial of\n service attack on the Squid service regardless of whether TLS or\n SSL is configured for use in the proxy.\n\n Misconfigured client or server software may trigger this issue\n to perform a denial of service unintentionally.\n\n However, the bug is exploitable only if Squid is built using the\n --with-openssl option.\n\n\nUpdated Packages:\n\n These bugs are fixed by Squid version 3.5.14 and 4.0.6.\n\n\n In addition, patches addressing this problem for stable releases\n can be found in our patch archives:\n\nSquid 3.5:\n http://www.squid-cache.org/Versions/v3/3.5/changesets/squid-3.5-13981.patch\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n All Squid-3.4 and older versions are not vulnerable.\n\n All Squid-3.5.12 and older 3.5 versions are not vulnerable.\n\n All Squid-3.5 built without OpenSSL support are not vulnerable.\n\n All Squid-4.0.3 and older 4.0 versions are not vulnerable.\n\n All Squid-4 built without OpenSSL support are not vulnerable.\n\n All unpatched Squid-3.5.13, 4.0.4, and 4.0.5 built using\n --with-openssl are vulnerable.\n\n The following command can be used to easily determine if a\n vulnerable build is being used:\n  squid -v\n\n\nWorkaround:\n\n Disabling service for https:// URLs entirely at the top of the\n squid.conf http_access rules fully protects against this\n vulnerability:\n\n   acl HTTPS proto HTTPS\n   http_access deny HTTPS\n\nOr,\n\n Relaying outbound HTTPS traffic through a non-vulnerable proxy\n protects against the issue unless the SSL-bump splice feature is\n being used.\n\nOr,\n\n Disabling service for irregular HTTPS ports protects against the\n simplest forms of attack while retaining most HTTPS service:\n\n   acl HTTPS proto HTTPS\n   http_access deny HTTPS !SSL_Ports\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If your install and build Squid from the original Squid sources\n then the squid-users@lists.squid-cache.org mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@lists.squid-cache.org mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n\nCredits:\n\n The vulnerability was reported by Mathias Fischer and Fabian\n Hugelshofer from Open Systems AG.\n\n The vulnerability was fixed by Christos Tsantilas of The\n Measurement Factory.\n\n\nRevision history:\n\n 2016-02-12 17:50:38 GMT Initial Report\n 2016-02-12 18:05:44 GMT Patch Released\n 2016-02-15 17:15:00 GMT Packages Released\n 2016-02-16 14:45:01 GMT CVE Assignment\n 2016-02-16 23:33:52 GMT Updated reporter credits",
+  "published": "2016-02-16T00:00:00Z",
+  "modified": "2016-02-16T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.5.13"
+            },
+            {
+              "fixed": "3.5.14"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "4.0.4"
+            },
+            {
+              "fixed": "4.0.6"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2016_1.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-2390"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2019:7",
+  "aliases": [
+    "CVE-2019-12526"
+  ],
+  "summary": "Heap Overflow in URN processing",
+  "details": "Problem Description:\n\n Due to incorrect buffer management Squid is vulnerable to a\n heap overflow and possible remote code execution attack when\n processing URN.\n\n\nSeverity:\n\n This allows a malicious client to write a substantial amount of\n arbitrary data to the heap. Potentially gaining ability to\n execute arbitrary code.\n\n On systems with memory access protections this can result in\n the Squid process being terminated unexpectedly. Resulting in a\n denial of service for all clients using the proxy.\n\n\nUpdated Packages:\n\n This bug is fixed by Squid version 4.9.\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\nSquid 4:\n <http://www.squid-cache.org/Versions/v4/SQUID-2019_7.patch>\n\n If you are using a prepackaged version of Squid then please refer\n to the package vendor for availability information on updated\n packages.\n\n\nDetermining if your version is vulnerable:\n\n All Squid-2.x are not vulnerable.\n\n All Squid-3.x up to and including 3.5.28 are vulnerable.\n\n All Squid-4.x up to and including 4.8 are vulnerable.\n\n\nWorkarounds:\n\n Deny urn: protocol URI being proxied to all clients:\n\n    acl URN proto URN\n    http_access deny URN\n\n\nContact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If your install and build Squid from the original Squid sources\n then the squid-users@lists.squid-cache.org mailing list is your\n primary support point. For subscription details see\n <http://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <http://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n squid-bugs@lists.squid-cache.org mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n\nCredits:\n\n This vulnerability was discovered by Jeriko One\n <jeriko.one@gmx.us>.\n\n Fixed by Eduard Bagdasaryan of The Measurement Factory.\n\n\nRevision history:\n\n 2019-05-14 14:56:49 UTC Initial Report\n 2019-06-05 15:52:17 UTC CVE Assignment\n 2019-09-15 15:32:30 UTC Patches Released",
+  "published": "2019-11-05T00:00:00Z",
+  "modified": "2019-11-05T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "3.0"
+            },
+            {
+              "last_affected": "3.5.28"
+            }
+          ]
+        },
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "4.0"
+            },
+            {
+              "fixed": "4.9"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2019_7.txt"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12526"
+    }
+  ]
+}

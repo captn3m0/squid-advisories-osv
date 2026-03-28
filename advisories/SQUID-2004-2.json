@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2004:2",
+  "aliases": [],
+  "summary": "Buffer overflow in ntlm_auth helper",
+  "details": "Problem Description:\n\n Squid supports numerous external authentication helper programs,\n which are used to validate credentials taken from HTTP requests.\n One of these helper programs, named 'ntlm_auth,' contains a buffer\n overflow bug that may allow malicious users to execute arbitrary\n code.  The affected source code file is\n helpers/ntlm_auth/SMB/libntlmssp.c.  The affected binary is\n named 'ntlm_auth'.\n\n The buffer overflow bug exists because the code uses a fixed-size\n character array to hold a password, but does not check the amount\n of data copied to that buffer.  A user can generate a long password\n that either crashes the helper process or causes it to execute\n arbitrary code.\n\n Note: the Samba-3 package also includes a program named 'ntlm_auth'\n that can be used as a Squid authenticator.  The Samba-3 version\n of 'ntlm_auth' is not vulnerable to the problem described here\n and we recommend using it over the Squid version in any case.\n\n\n------------------------------------------------------------------\n\nSeverity:\n\n If you are using the 'ntlm_auth' helper from Squid, you should\n upgrade your installation immediately.  This overflow bug may allow\n an attacker to execute arbitrary code by overwriting the process\n stack.  Note that the 'ntlm_auth' helper does not run as root; it\n executes under the same userid as the primary Squid process.\n\n\nUpdated Packages:\n\n The Squid-2.5.STABLE6 release contains a fix for this\n problem. You can download the Squid-2.5.STABLE6 release from\n\n   ftp://ftp.squid-cache.org/pub/archive/2.5/\n   http://www.squid-cache.org/Versions/v2/2.5/\n\n or the mirrors (may take a while before all mirrors are updated).\n For a list of mirror sites see\n\n   http://www.squid-cache.org/Download/ftp-mirrors.html\n   http://www.squid-cache.org/Download/http-mirrors.html\n\n Individual patches to the mentioned issues can be found from our\n patch archive for version Squid-2.5.STABLE5:\n\n   http://www.squid-cache.org/Versions/v2/2.5/bugs/\n\n The patches should also apply with only a minimal effort to\n earlier Squid 2.5 versions if required.\n\n If you are using a prepackaged version of Squid then please\n refer to the package vendor for availability information on\n updated packages.\n\n\nDetermining if your version is vulnerable:\n\n You are not vulnerable if you are using the 'ntlm_auth' program\n that comes with Samba-3.  If your squid.conf file as a line that\n starts with 'auth_param ntlm program' and also contains the string\n '--helper-protocol=' then you are using the Samba-3 version.\n\n You are vulnerable if you have configured Squid to compile and use\n the NTLM SMB authentication helper in Squid version 2.5.STABLE5\n and earlier.  Run the following command to determine which version\n of Squid you are using:\n\n    squid -v\n\n You can also search for the ntlm_auth binary in the directory where\n Squid is installed.  By default it will be\n /usr/local/squid/libexec/ntlm_auth.  Also check your squid.conf\n file for the string 'ntlm_auth'.  If you have the file installed,\n but are not referencing it in squid.conf, then your installation\n is not vulerable.  In that case, you should remove the unused\n binary to be safe.\n\n If you are using a binary or otherwise pre-packaged version please\n verify with your vendor on which versions are affected as some\n vendors ship earlier versions with the needed patches applied.\n Note that unless you have upgraded to a version released after\n 2004-06-07 you may be vulnerable to this bug.\n\n\nOther versions of Squid:\n\n NTLM support was introduced in Squid-2.5.  Earlier versions are\n not vulnerable.  Even so, versions prior to the 2.5 series are\n deprecated, please update to Squid-2.5.STABLE6 if you are using a\n version older than 2.5.\n\n These changes have also been made to the Squid-3 source tree.\n\n\nWorkarounds:\n\n One workaround is to use the 'ntlm_auth' binary from the Samba-3\n sources.  That version has a somewhat different command line syntax\n that Squid's, so be sure to read the Samba-3 documentation for\n 'ntlm_auth'.\n\n Another workaround is to temporarily disable Squid's 'ntlm_auth'\n authenticator until it has been patched.  You may need to use\n another authentication technique during that time, however.\n\n It is also a good idea to place rules in your http_access list\n that deny all requests from outside your organization (e.g., using\n the 'src' ACL type).  Place these rules before any 'proxy_auth'\n rules so that an outsider's request is refused before Squid attempts\n to validate it with the 'ntlm_auth' helper.\n\n\nContact details for the Squid project:\n\n For installation / upgrade support: Your first point of contact\n should be your binary package vendor.\n\n If your install is built from the original Squid sources, then\n the squid-users@squid-cache.org mailing list is your primary\n support point. (see <http://www.squid-cache.org/Support/mailing-lists.html>\n for subscription details).\n\n For bug reporting, particularly security related bugs the\n squid-bugs@squid-cache.org mailing list is the appropriate forum.\n It's a closed list (though anyone can post) and security related\n bug reports are treated in confidence until the impact has been\n established. For non security related bugs, the squid bugzilla\n database should be used <http://bugs.squid-cache.org/>.\n\n\nCredits:\n\n The vulerability was reported by Michael Sutton of iDEFENSE Labs.\n (www.idefense.com).\n\n Duane Wessels developed the patch for libntlmssp.c.\n\n\nRevision history:\n\n 2004-06-07 23:00 GMT Initial release\n 2004-06-13 14:44 GMT Cosmetic update\n 2010-09-16 07:05 GMT Reference link updates",
+  "published": "2004-06-07T00:00:00Z",
+  "modified": "2004-06-07T00:00:00Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "2.5.0"
+            },
+            {
+              "last_affected": "2.5.STABLE5"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://www.squid-cache.org/Advisories/SQUID-2004_2.txt"
+    }
+  ]
+}
