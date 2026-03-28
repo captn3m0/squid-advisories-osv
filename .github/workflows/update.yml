@@ -1,0 +1,28 @@
+name: Update Data
+on:
+  workflow_dispatch:
+  push:
+  schedule:
+    - cron: '35 6 * * *'
+jobs:
+  update:
+    name: Update data
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        ref: ${{ github.head_ref }}
+    - uses: actions/setup-python@v6
+      with:
+        python-version: '3.14'
+    - name: Update data
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: python main.py
+      id: update_advisories
+    - uses: stefanzweifel/git-auto-commit-action@v5
+      with:
+        commit_message: Update Advisories
+        commit_author: 'github-actions[bot] <github-actions[bot]@users.noreply.github.com>'
+        file_pattern: "advisories/*.json"
+        skip_fetch: true
