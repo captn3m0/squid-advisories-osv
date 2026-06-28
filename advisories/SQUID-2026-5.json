@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2026:5",
+  "aliases": [
+    "GHSA-5vmx-9x64-9284",
+    "CVE-2026-50012"
+  ],
+  "summary": "Memory corruption in cache_digest reply handling",
+  "details": "__________________________________________________________________\n\n    Squid Proxy Cache Security Update Advisory SQUID-2026:5\n__________________________________________________________________\n|||\n| ------------------ | ---\nAdvisory ID:       | SQUID-2026:5\nDate:              | 2026-06-14\nSummary:           | Memory corruption in cache_digest reply handling\nAffected versions: | Squid 3.x -> 3.5.27\n|                  | Squid 4.x -> 4.17\n|                  | Squid 5.x -> 5.9\n|                  | Squid 6.x -> 6.14\n|                  | Squid 7.x -> 7.5\nFixed in version:  | Squid 7.6\n__________________________________________________________________\n\n### Problem Description:\n\n Due to an Improper Input Validation bug, Squid is vulnerable to\n a Heap-based Buffer Overflow attack against cache digests.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a trusted server to perform a Heap-based\n Buffer Overflow when sending maliciously crafted replies to\n cache_digest request messages.\n\n This attack is limited to Squid instances that have been\n compiled with the --enable-cache-digests option.\n\n Trusted peers are expected to be servers within the same\n administrative domain. As cache digests are exchanged over TCP,\n there is no risk of spoofing.\n\n__________________________________________________________________\n\n### Updated Packages:\n\n#### This bug is fixed by Squid version 7.6\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n#### Squid 7:\n <https://github.com/squid-cache/squid/commit/19fcfe922717c8b255270c032dcde4071c003bcd.patch>\n\n If you are using a prepackaged version of Squid then please\n refer to the package vendor for availability information on\n updated packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\nThe following test can be used to determine affected feature use:\n```\n squid -v | grep -q 'enable-cache-digests' &&\n  squid -k parse 2>&1 | grep -w cache_peer | grep -v no-digest\n```\n\n * All Squid 7.5 and older without output are not vulnerable.\n\n * All Squid 7.5 and older with output are vulnerable.\n\n * All Squid 7.6 and later are not vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\nEither\n\n  Audit your squid configuration and ensure that all configured\n  cache_peer's are under your organisational control and fully\n  trusted. This will greatly reduce the risk.\n\nor\n\n  Disable cache digests for those peers by adding the\n  'no-digest' option for cache_peer you do not directly control.\n  This will remove the vulnerability at cost of increased\n  bandwidth. Use of HTCP or ICP can reduce that cost.\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is\n your primary support point. For subscription details see\n <https://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <https://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\n This vulnerability was discovered independently by\n  Huy Ho\u00e0ng Nguy\u1ec5n of Sun Asterisk Vietnam, and\n  Sarthak Munshi\n\n Fixed by Francesco Chemolli <kinkie@squid-cache.org>\n\n__________________________________________________________________\n\n### Revision history:\n\n 2026-05-11 Initial Report\n 2026-05-30 10:16:33 Patch published\n\n__________________________________________________________________\nEND",
+  "published": "2026-06-23T05:43:31Z",
+  "modified": "2026-06-23T05:43:31Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "0"
+            },
+            {
+              "fixed": "7.6"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:N/I:L/A:H"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-5vmx-9x64-9284"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-50012"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-5vmx-9x64-9284"
+    }
+  ]
+}
