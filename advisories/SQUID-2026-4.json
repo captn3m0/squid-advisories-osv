@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0.0",
+  "id": "SQUID-2026:4",
+  "aliases": [
+    "GHSA-8c37-pxjq-qwrg",
+    "CVE-2026-47729"
+  ],
+  "summary": "Memory disclosure in FTP gateway",
+  "details": "Due to a  Improper Validation of Syntactic Correctness of Input\n bug, Squid is vulnerable to a Out-of-bounds Read\n attack against the FTP gateway.\n\n__________________________________________________________________\n\n### Severity:\n\n This problem allows a trusted client to perform an Out-of-Bounds\n Read from random unrelated transactions when accessing a\n misbehaving FTP server through Squid's gateway feature.\n\n__________________________________________________________________\n\n### Updated Packages:\n\n## This bug is fixed by Squid version 7.6\n\n In addition, patches addressing this problem for the stable\n releases can be found in our patch archives:\n\n## Squid 7:\n <https://github.com/squid-cache/squid/commit/865a131c7d557e68c965043d98c2eccae26deef8.patch>\n\n If you are using a prepackaged version of Squid then please\n refer to the package vendor for availability information on\n updated packages.\n\n__________________________________________________________________\n\n### Determining if your version is vulnerable:\n\n Squid older than 3.5.28 have not been tested and should be\n assumed to be vulnerable.\n\n All Squid-4.x are vulnerable.\n\n All Squid-5.x are vulnerable.\n\n All Squid-6.x are vulnerable.\n\n All Squid-7.x up to and including 7.5 are vulnerable.\n\n__________________________________________________________________\n\n### Workaround:\n\n Place these squid.conf settings above any custom\n 'http_access allow' lines in your squid.conf:\n\n```\nacl FTP proto FTP\nacl ftp_allowlist url_regex ^ftp://trusted\\.server\\.example\\.com \n\nhttp_access deny FTP !ftp_allowlist\n```\n\n Note: The ftp_allowlist ACL is optional, for those who need to\n       allow some FTP access to trusted servers. Best workaround\n       is not to use one unless necessary.\n\n__________________________________________________________________\n\n### Contact details for the Squid project:\n\n For installation / upgrade support on binary packaged versions\n of Squid: Your first point of contact should be your binary\n package vendor.\n\n If you install and build Squid from the original Squid sources\n then the <squid-users@lists.squid-cache.org> mailing list is\n your primary support point. For subscription details see\n <https://www.squid-cache.org/Support/mailing-lists.html>.\n\n For reporting of non-security bugs in the latest STABLE release\n the squid bugzilla database should be used\n <https://bugs.squid-cache.org/>.\n\n For reporting of security sensitive bugs send an email to the\n <squid-bugs@lists.squid-cache.org> mailing list. It's a closed\n list (though anyone can post) and security related bug reports\n are treated in confidence until the impact has been established.\n\n__________________________________________________________________\n\n### Credits:\n\nThis vulnerability was discovered and reported independently by\n Pavel Kohout of Aisle Research, and\n Lam Jun Rong of Calif.io in collaboration with Anthropic Research, and\n Youssef Awad of CTF.ae\n\nFixed by Alex Rousskov, The Measurement Factory.\n__________________________________________________________________\n\n### Revision history:\n\n 2026-03-04 12:41:54 UTC Initial Report by Pavel Kohout of Aisle Research\n 2026-04-17: Initial Report by Lam Jun Rong\n 2026-05-07: Initial Report by Youssef Awad\n 2026-05-17 06:04:47 UTC patch published\n \n__________________________________________________________________\nEND",
+  "published": "2026-06-23T05:29:01Z",
+  "modified": "2026-06-23T05:29:01Z",
+  "affected": [
+    {
+      "package": {
+        "ecosystem": "Other",
+        "name": "squid",
+        "purl": "pkg:generic/squid"
+      },
+      "ranges": [
+        {
+          "type": "SEMVER",
+          "events": [
+            {
+              "introduced": "0"
+            },
+            {
+              "fixed": "7.6"
+            }
+          ]
+        }
+      ],
+      "severity": [
+        {
+          "type": "CVSS_V3",
+          "score": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N"
+        }
+      ]
+    }
+  ],
+  "references": [
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/squid-cache/squid/security/advisories/GHSA-8c37-pxjq-qwrg"
+    },
+    {
+      "type": "REPORT",
+      "url": "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-47729"
+    },
+    {
+      "type": "ADVISORY",
+      "url": "https://github.com/advisories/GHSA-8c37-pxjq-qwrg"
+    }
+  ]
+}
